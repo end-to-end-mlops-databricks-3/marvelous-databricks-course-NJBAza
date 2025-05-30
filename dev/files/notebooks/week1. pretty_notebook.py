@@ -8,10 +8,42 @@
 
 # COMMAND ----------
 
+# MAGIC %pip install -e ..
+
+# COMMAND ----------
+
+import os
+
+token = dbutils.secrets.get("my-secrets", "GIT_TOKEN")
+url = f"git+https://{token}@github.com/end-to-end-mlops-databricks-3/marvelous@0.1.0"
+%pip install $url
+
+# COMMAND ----------
+
+# MAGIC %restart_python
+
+# COMMAND ----------
+
+from pathlib import Path
+import sys
+sys.path.append(str(Path.cwd().parent / 'src'))
+
+# COMMAND ----------
+
+print("Current working directory:", Path.cwd())
+print("Parent directory:", Path.cwd().parent)
+print("Target src path added:", Path.cwd().parent / 'src')
+
+# COMMAND ----------
+
+import marvelous
+
+# COMMAND ----------
+
 import pandas as pd
 import yaml
-from house_price.config import ProjectConfig
-from house_price.data_processor import DataProcessor
+from satisfaction_customer.config import ProjectConfig
+from satisfaction_customer.data_processor import DataProcessor
 from loguru import logger
 from marvelous.logging import setup_logging
 from marvelous.timer import Timer
