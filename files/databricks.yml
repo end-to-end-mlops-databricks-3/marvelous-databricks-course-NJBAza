@@ -1,0 +1,20 @@
+# This is a Databricks asset bundle definition for marvelous-databricks-course-NJBAza.
+# The Databricks extension requires databricks.yml configuration file.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+
+bundle:
+  name: marvelous-databricks-course-NJBAza
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-c2e8445d-159d.cloud.databricks.com
+      root_path: /Users/njavierbuitragoa@gmail.com/marvelous-databricks-course-NJBAza
+
+  ## Optionally, there could be 'staging' or 'prod' targets here.
+  #
+  # prod:
+  #   workspace:
+  #     host: https://dbc-c2e8445d-159d.cloud.databricks.com
