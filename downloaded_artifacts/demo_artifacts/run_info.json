@@ -1,0 +1,40 @@
+{
+    "info": {
+        "artifact_uri": "dbfs:/databricks/mlflow-tracking/820920883760603/b9faf63c1524490585d366523cb7923f/artifacts",
+        "end_time": 1748840309454,
+        "experiment_id": "820920883760603",
+        "lifecycle_stage": "active",
+        "run_id": "b9faf63c1524490585d366523cb7923f",
+        "run_name": "demo-run",
+        "run_uuid": "b9faf63c1524490585d366523cb7923f",
+        "start_time": 1748840290664,
+        "status": "FINISHED",
+        "user_id": ""
+    },
+    "data": {
+        "metrics": {
+            "metric1": 1.0,
+            "metric2": 2.0
+        },
+        "params": {
+            "type": "demo"
+        },
+        "tags": {
+            "branch": "week2",
+            "git_sha": "1234567890abcd",
+            "mlflow.databricks.cluster.id": "0513-034239-2ft9s6ba",
+            "mlflow.databricks.cluster.info": "{\"cluster_name\":\"Javier Buitrago Cluster\",\"spark_version\":\"15.4.x-cpu-ml-scala2.12\",\"node_type_id\":\"i3.xlarge\",\"driver_node_type_id\":\"i3.xlarge\",\"autotermination_minutes\":120,\"disk_spec\":{\"disk_count\":0},\"num_workers\":0}",
+            "mlflow.databricks.cluster.libraries": "{\"installable\":[],\"redacted\":[]}",
+            "mlflow.databricks.notebook.commandID": "1748834681076_9028099921021452157_5e98e876bdff46678263c0194df54bb8",
+            "mlflow.note.content": "demo run",
+            "mlflow.runColor": "#da4c4c",
+            "mlflow.runName": "demo-run",
+            "mlflow.source.name": "/home/javier/repos/course-code-hub/.venv/lib/python3.11/site-packages/ipykernel_launcher.py",
+            "mlflow.source.type": "LOCAL",
+            "mlflow.user": "njavierbuitragoa@gmail.com"
+        }
+    },
+    "inputs": {
+        "dataset_inputs": []
+    }
+}

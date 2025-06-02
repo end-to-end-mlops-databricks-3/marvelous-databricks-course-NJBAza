@@ -1,0 +1,14 @@
+{
+    "_experiment_id": "820920883760603",
+    "_name": "/Shared/satisfaction_customer",
+    "_artifact_location": "dbfs:/databricks/mlflow-tracking/820920883760603",
+    "_lifecycle_stage": "active",
+    "_tags": {
+        "mlflow.ownerId": "4396625552857570",
+        "mlflow.experiment.sourceName": "/Shared/satisfaction_customer",
+        "mlflow.ownerEmail": "njavierbuitragoa@gmail.com",
+        "mlflow.experimentType": "MLFLOW_EXPERIMENT"
+    },
+    "_creation_time": 1748840109208,
+    "_last_update_time": 1748840109208
+}
