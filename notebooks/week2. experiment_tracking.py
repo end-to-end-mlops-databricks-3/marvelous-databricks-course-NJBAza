@@ -1,11 +1,10 @@
 # Databricks notebook source
 import json
-import mlflow
 import os
 
+import mlflow
 from dotenv import load_dotenv
 from marvelous.common import is_databricks
-
 
 # COMMAND ----------
 
@@ -23,9 +22,7 @@ mlflow.get_tracking_uri()
 # COMMAND ----------
 
 experiment = mlflow.set_experiment(experiment_name="/Shared/satisfaction_customer")
-mlflow.set_experiment_tags(
-    {"repository_name": "end-to-end-mlops-databricks-3/marvelous-databricks-course-NJBAza"}
-)
+mlflow.set_experiment_tags({"repository_name": "end-to-end-mlops-databricks-3/marvelous-databricks-course-NJBAza"})
 
 print(experiment)
 
@@ -214,9 +211,7 @@ mlflow.artifacts.load_image(f"{artifact_uri}/figure.png")
 # COMMAND ----------
 
 # download artifacts
-mlflow.artifacts.download_artifacts(
-    artifact_uri=f"{artifact_uri}/demo_artifacts", dst_path="../downloaded_artifacts"
-)
+mlflow.artifacts.download_artifacts(artifact_uri=f"{artifact_uri}/demo_artifacts", dst_path="../downloaded_artifacts")
 
 # COMMAND ----------
 

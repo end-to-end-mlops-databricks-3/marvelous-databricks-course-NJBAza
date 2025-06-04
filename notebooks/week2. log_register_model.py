@@ -32,7 +32,7 @@ from satisfaction_customer.config import ProjectConfig
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
-from lightgbm import LGBMRegressor
+from xgboost import XGBClassifier
 from mlflow.models import infer_signature
 from marvelous.common import is_databricks
 from dotenv import load_dotenv

@@ -3,6 +3,8 @@
 import mlflow
 import pandas as pd
 from conftest import CATALOG_DIR, TRACKING_URI
+from house_price.config import ProjectConfig, Tags
+from house_price.models.custom_model import CustomModel
 from lightgbm import LGBMRegressor
 from loguru import logger
 from mlflow.entities.model_registry.registered_model import RegisteredModel
@@ -10,9 +12,6 @@ from mlflow.tracking import MlflowClient
 from pyspark.sql import SparkSession
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-
-from house_price.config import ProjectConfig, Tags
-from house_price.models.custom_model import CustomModel
 
 mlflow.set_tracking_uri(TRACKING_URI)
 
