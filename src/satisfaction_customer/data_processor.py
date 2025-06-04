@@ -1,11 +1,13 @@
 import pandas as pd
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import current_timestamp, to_utc_timestamp
+from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 
 from satisfaction_customer.config import ProjectConfig
-from satisfaction_customer.processing.data_handling import save_pipeline, separate_data, split_data
+from satisfaction_customer.processing.data_handling import save_pipeline
 
+RANDOM_SEED = 20230916
 
 class DataProcessor:
     """A class to manage training, prediction, and integration of an sklearn pipeline with Databricks.
@@ -23,13 +25,23 @@ class DataProcessor:
 
     """
 
-    def __init__(self, df: pd.DataFrame, pipeline: Pipeline, spark: SparkSession, config: ProjectConfig) -> None:
+    def __init__(
+        self,
+        df: pd.DataFrame,
+        pipeline: Pipeline,
+        spark: SparkSession,
+        config: ProjectConfig,
+    ) -> None:
         """Initialize the DataProcessor."""
         self.df = df
         self.pipeline = pipeline
         self.spark = spark
         self.config = config
 
+    def transform(self) -> pd.DataFrame:
+        """Apply the pipeline's fit_transform to the internal DataFrame."""
+        return self.pipeline.transform(self.df)
+    
     def train(self) -> None:
         """Fit the sklearn pipeline on the current DataFrame and persist it using joblib."""
         X, y = separate_data(self.df)
@@ -56,25 +68,24 @@ class DataProcessor:
         df_out["prediction"] = preds
         return df_out
 
-    def split_data(
-        self, test_size: float = 0.2, random_state: int = 42
-    ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-        """Split the internal DataFrame into training and testing sets.
+    def split_data(self, test_size: float = 0.2, random_state: int = RANDOM_SEED) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Split the transformed internal DataFrame into training and test sets.
 
-        Parameters
-        ----------
-        test_size : float
-            Proportion of the dataset to include in the test split.
-        random_state : int
-            Random seed for reproducibility.
+    Parameters
+    ----------
+    test_size : float
+        Proportion of the dataset to include in the test split.
+    random_state : int
+        Random seed for reproducibility.
 
-        Returns
-        -------
-        tuple : X_train, X_test, y_train, y_test
-
-        """
-        X, y = separate_data(self.df)
-        return split_data(X, y, test_size=test_size, random_state=random_state)
+    Returns
+    -------
+    Tuple[pd.DataFrame, pd.DataFrame]
+        The transformed training and test sets.
+    """
+    df_transformed = self.transform()
+    train_set, test_set = train_test_split(df_transformed, test_size=test_size, random_state=random_state)
+    return train_set, test_set
 
     def save_to_catalog(
         self,

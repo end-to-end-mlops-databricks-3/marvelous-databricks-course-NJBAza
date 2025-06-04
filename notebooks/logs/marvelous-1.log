@@ -40,3 +40,581 @@ __pydantic_fields_set__: !!set
   schema_name: null
   target: null
 __pydantic_private__: null
+2025-06-02 12:54:09.204 | INFO     | __main__:<module>:14 - Configuration loaded:
+2025-06-02 12:54:09.207 | INFO     | __main__:<module>:15 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-02 14:59:54.639 | INFO     | __main__:<module>:14 - Configuration loaded:
+2025-06-02 14:59:54.642 | INFO     | __main__:<module>:15 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-03 22:01:45.759 | INFO     | __main__:<module>:15 - Configuration loaded:
+2025-06-03 22:01:45.762 | INFO     | __main__:<module>:16 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-03 22:17:26.897 | INFO     | __main__:<module>:15 - Configuration loaded:
+2025-06-03 22:17:26.901 | INFO     | __main__:<module>:16 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+2025-06-03 22:55:13.930 | INFO     | __main__:<module>:16 - Configuration loaded:
+2025-06-03 22:55:13.934 | INFO     | __main__:<module>:17 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-03 23:14:52.928 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341a91550>
+2025-06-03 23:14:55.936 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb34146a690>
+2025-06-03 23:27:24.823 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341a471d0>
+2025-06-04 00:01:24.728 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341d014d0>
+2025-06-04 00:02:10.256 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb342572c10>
+2025-06-04 00:02:23.096 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341635810>
+2025-06-04 00:02:56.284 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341940b50>
+2025-06-04 00:03:10.652 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb34154f490>
+2025-06-04 00:04:30.120 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341c0e650>
+2025-06-04 00:11:03.299 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341b97310>
+2025-06-04 00:11:13.215 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb342582410>
+2025-06-04 00:11:44.082 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb342318fd0>
+2025-06-04 00:22:58.223 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341b4a810>
+2025-06-04 00:35:37.610 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341b4bf50>
+2025-06-04 00:36:06.390 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341a76950>
+2025-06-04 00:37:04.064 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb341c01210>
+2025-06-04 00:37:43.316 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb34194c990>
+2025-06-04 00:40:32.414 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb34151fe50>
+2025-06-04 01:02:08.712 | INFO     | __main__:<module>:14 - Configuration loaded:
+2025-06-04 01:02:08.716 | INFO     | __main__:<module>:15 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+2025-06-04 16:13:31.081 | INFO     | __main__:<module>:15 - Configuration loaded:
+2025-06-04 16:13:31.084 | INFO     | __main__:<module>:16 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-04 20:54:41.276 | INFO     | __main__:<module>:15 - Configuration loaded:
+2025-06-04 20:54:41.280 | INFO     | __main__:<module>:16 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__private_attribute_values__: {}
+
+2025-06-04 20:55:17.251 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7ee76280aa10>
+2025-06-04 21:04:45.069 | INFO     | __main__:<module>:15 - Configuration loaded:
+2025-06-04 21:04:45.072 | INFO     | __main__:<module>:16 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__private_attribute_values__: {}
+
+2025-06-04 21:05:04.630 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7ee76310a590>
+2025-06-04 21:12:58.448 | INFO     | __main__:<module>:17 - Configuration loaded:
+2025-06-04 21:12:58.452 | INFO     | __main__:<module>:18 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__private_attribute_values__: {}
+
+2025-06-04 21:13:50.225 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-04 21:13:50.227 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__private_attribute_values__: {}
+
+2025-06-04 21:25:47.018 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-04 21:25:47.021 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__private_attribute_values__: {}
+
+2025-06-04 21:26:43.456 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x75455660ae10>
+2025-06-04 21:33:44.486 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x75458d65ae10>
+2025-06-04 21:39:45.998 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-04 21:39:46.000 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-04 22:02:08.833 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-04 22:02:08.836 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__private_attribute_values__: {}
+
+2025-06-04 22:02:53.228 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x75455660ae10>
+2025-06-04 22:03:17.678 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-04 22:03:17.679 | INFO     | __main__:<module>:4 - Test set shape: %s

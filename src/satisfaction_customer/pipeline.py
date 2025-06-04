@@ -2,15 +2,16 @@ import os
 import sys
 from pathlib import Path
 
-import processing.preprocessing as pp
-from config import config
-from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 
 # Assuming 'prediction_model' is in the parent directory
 PACKAGE_ROOT = Path(os.path.abspath(os.path.dirname(__file__))).parent
 sys.path.append(str(PACKAGE_ROOT.parent))
 
+sys.path.append(str(Path.cwd().parent / "src"))
+
+import processing.preprocessing as pp
+from config import config
 
 RANDOM_SEED = 20230916
 
