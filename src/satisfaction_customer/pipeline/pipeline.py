@@ -39,7 +39,9 @@ transform_pipeline = Pipeline(
         (
             "Chosen",
             pp.ChosenFeatures(
-                columns=settings.NUMERICAL_FEATURES_3 + settings.CATEGORICAL_FEATURES + [settings.TARGET]
+                columns=settings.NUMERICAL_FEATURES_3
+                + settings.CATEGORICAL_FEATURES
+                + [settings.TARGET]
             ),
         ),
         (

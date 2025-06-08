@@ -1,12 +1,12 @@
 prd:
   catalog_name: mlops_prd
-  schema_name: satisfaction_customer
+  schema_name: njavierb
 acc:
   catalog_name: mlops_acc
-  schema_name: satisfaction_customer
+  schema_name: njavierb
 dev:
   catalog_name: mlops_dev
-  schema_name: satisfaction_customer
+  schema_name: njavierb
 
 parameters:
   learning_rate: 0.01

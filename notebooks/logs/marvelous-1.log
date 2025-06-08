@@ -314,8 +314,8 @@ __pydantic_fields_set__: !!set
   schema_name: null
   target: null
 __pydantic_private__: null
-2025-06-04 16:13:31.081 | INFO     | __main__:<module>:15 - Configuration loaded:
-2025-06-04 16:13:31.084 | INFO     | __main__:<module>:16 - !!python/object:satisfaction_customer.config.ProjectConfig
+2025-06-04 17:45:29.795 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-04 17:45:29.797 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
 __dict__:
   catalog_name: mlops_dev
   features:
@@ -357,8 +357,9 @@ __pydantic_fields_set__: !!set
   target: null
 __pydantic_private__: null
 
-2025-06-04 20:54:41.276 | INFO     | __main__:<module>:15 - Configuration loaded:
-2025-06-04 20:54:41.280 | INFO     | __main__:<module>:16 - !!python/object:satisfaction_customer.config.ProjectConfig
+2025-06-04 17:46:15.608 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fcc578ede10>
+2025-06-04 17:48:12.690 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-04 17:48:12.694 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
 __dict__:
   catalog_name: mlops_dev
   features:
@@ -391,17 +392,18 @@ __dict__:
     n_estimators: 1000
   schema_name: satisfaction_customer
   target: satisfaction_v2
-__fields_set__: !!set
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
   catalog_name: null
   features: null
   parameters: null
   schema_name: null
   target: null
-__private_attribute_values__: {}
+__pydantic_private__: null
 
-2025-06-04 20:55:17.251 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7ee76280aa10>
-2025-06-04 21:04:45.069 | INFO     | __main__:<module>:15 - Configuration loaded:
-2025-06-04 21:04:45.072 | INFO     | __main__:<module>:16 - !!python/object:satisfaction_customer.config.ProjectConfig
+2025-06-04 17:48:44.986 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fcc56e1e6d0>
+2025-06-04 17:49:15.517 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-04 17:49:15.519 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
 __dict__:
   catalog_name: mlops_dev
   features:
@@ -434,17 +436,17 @@ __dict__:
     n_estimators: 1000
   schema_name: satisfaction_customer
   target: satisfaction_v2
-__fields_set__: !!set
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
   catalog_name: null
   features: null
   parameters: null
   schema_name: null
   target: null
-__private_attribute_values__: {}
+__pydantic_private__: null
 
-2025-06-04 21:05:04.630 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7ee76310a590>
-2025-06-04 21:12:58.448 | INFO     | __main__:<module>:17 - Configuration loaded:
-2025-06-04 21:12:58.452 | INFO     | __main__:<module>:18 - !!python/object:satisfaction_customer.config.ProjectConfig
+2025-06-07 23:45:01.197 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-07 23:45:01.203 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
 __dict__:
   catalog_name: mlops_dev
   features:
@@ -477,16 +479,22 @@ __dict__:
     n_estimators: 1000
   schema_name: satisfaction_customer
   target: satisfaction_v2
-__fields_set__: !!set
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
   catalog_name: null
   features: null
   parameters: null
   schema_name: null
   target: null
-__private_attribute_values__: {}
+__pydantic_private__: null
 
-2025-06-04 21:13:50.225 | INFO     | __main__:<module>:18 - Configuration loaded:
-2025-06-04 21:13:50.227 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+2025-06-07 23:56:01.028 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f2f524ade10>
+2025-06-07 23:58:48.130 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-07 23:58:48.131 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:08:53.271 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 00:08:53.272 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:23:34.928 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 00:23:34.931 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
 __dict__:
   catalog_name: mlops_dev
   features:
@@ -519,16 +527,24 @@ __dict__:
     n_estimators: 1000
   schema_name: satisfaction_customer
   target: satisfaction_v2
-__fields_set__: !!set
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
   catalog_name: null
   features: null
   parameters: null
   schema_name: null
   target: null
-__private_attribute_values__: {}
+__pydantic_private__: null
 
-2025-06-04 21:25:47.018 | INFO     | __main__:<module>:18 - Configuration loaded:
-2025-06-04 21:25:47.021 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+2025-06-08 00:23:56.475 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f2f7e209e10>
+2025-06-08 00:24:08.905 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 00:24:08.906 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:28:43.989 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 00:28:43.990 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:28:46.914 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 00:28:46.915 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:33:40.126 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 00:33:40.129 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
 __dict__:
   catalog_name: mlops_dev
   features:
@@ -561,20 +577,27 @@ __dict__:
     n_estimators: 1000
   schema_name: satisfaction_customer
   target: satisfaction_v2
-__fields_set__: !!set
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
   catalog_name: null
   features: null
   parameters: null
   schema_name: null
   target: null
-__private_attribute_values__: {}
+__pydantic_private__: null
 
-2025-06-04 21:26:43.456 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x75455660ae10>
-2025-06-04 21:33:44.486 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x75458d65ae10>
-2025-06-04 21:39:45.998 | INFO     | __main__:<module>:3 - Training set shape: %s
-2025-06-04 21:39:46.000 | INFO     | __main__:<module>:4 - Test set shape: %s
-2025-06-04 22:02:08.833 | INFO     | __main__:<module>:18 - Configuration loaded:
-2025-06-04 22:02:08.836 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+2025-06-08 00:33:51.882 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f2f52936c90>
+2025-06-08 00:34:13.096 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 00:34:13.097 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:36:50.955 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f2f523c6a50>
+2025-06-08 00:37:12.267 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 00:37:12.268 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:38:40.305 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f2f523c5550>
+2025-06-08 00:38:49.404 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 00:38:49.405 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:41:04.109 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f2f52397210>
+2025-06-08 00:42:17.887 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 00:42:17.889 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
 __dict__:
   catalog_name: mlops_dev
   features:
@@ -607,14 +630,441 @@ __dict__:
     n_estimators: 1000
   schema_name: satisfaction_customer
   target: satisfaction_v2
-__fields_set__: !!set
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
   catalog_name: null
   features: null
   parameters: null
   schema_name: null
   target: null
-__private_attribute_values__: {}
+__pydantic_private__: null
 
-2025-06-04 22:02:53.228 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x75455660ae10>
-2025-06-04 22:03:17.678 | INFO     | __main__:<module>:3 - Training set shape: %s
-2025-06-04 22:03:17.679 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:42:36.817 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fcde00c1d50>
+2025-06-08 00:43:09.853 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fcddf99c1d0>
+2025-06-08 00:43:42.280 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 00:43:42.282 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-08 00:44:24.113 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f9ad9fdc310>
+2025-06-08 00:46:14.800 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f9ada4e4890>
+2025-06-08 00:47:44.095 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 00:47:44.098 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-08 00:47:59.543 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f67525129d0>
+2025-06-08 00:48:11.604 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 00:48:11.605 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:57:37.449 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 00:57:37.451 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-08 00:57:58.948 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f9560888f90>
+2025-06-08 00:58:05.884 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 00:58:05.888 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 00:58:44.906 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:04:00.217 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:04:42.673 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:04:42.675 | INFO     | __main__:<module>:6 - Enable change data feed
+2025-06-08 01:04:48.556 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:04:48.558 | INFO     | __main__:<module>:6 - Enable change data feed
+2025-06-08 01:04:54.086 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:08:57.003 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 01:08:57.006 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-08 01:09:06.854 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fa62500d2d0>
+2025-06-08 01:09:12.131 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 01:09:12.132 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 01:09:18.518 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:22:01.436 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 01:22:01.439 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-08 01:22:08.986 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fe0ccebe710>
+2025-06-08 01:22:15.239 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 01:22:15.240 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 01:22:40.610 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:27:49.175 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 01:27:49.178 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: njavierb
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-08 01:28:02.968 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb297cd0210>
+2025-06-08 01:28:07.384 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 01:28:07.386 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 01:28:12.152 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:37:22.051 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 01:37:22.054 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: njavierb
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-08 01:37:35.553 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fc437dbbb50>
+2025-06-08 01:37:40.341 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 01:37:40.342 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 01:37:44.501 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:41:31.118 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 01:41:31.120 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: njavierb
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-08 01:41:35.634 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7fb651dad390>
+2025-06-08 01:41:39.154 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 01:41:39.156 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 01:41:42.264 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:46:16.052 | INFO     | __main__:<module>:18 - Configuration loaded:
+2025-06-08 01:46:16.054 | INFO     | __main__:<module>:19 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: njavierb
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
+2025-06-08 01:46:16.374 | INFO     | __main__:<module>:6 - Data preprocessing: <satisfaction_customer.data_processor.DataProcessor object at 0x7f031caf07d0>
+2025-06-08 01:46:17.998 | INFO     | __main__:<module>:3 - Training set shape: %s
+2025-06-08 01:46:17.999 | INFO     | __main__:<module>:4 - Test set shape: %s
+2025-06-08 01:46:20.962 | INFO     | __main__:<module>:2 - Saving data to catalog
+2025-06-08 01:51:24.283 | INFO     | __main__:<module>:6 - Enable change data feed
