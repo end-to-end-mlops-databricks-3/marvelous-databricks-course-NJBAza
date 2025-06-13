@@ -1,0 +1,43 @@
+2025-06-01 18:26:42.892 | INFO     | __main__:<module>:14 - Configuration loaded:
+2025-06-01 18:26:42.895 | INFO     | __main__:<module>:15 - !!python/object:satisfaction_customer.config.ProjectConfig
+__dict__:
+  catalog_name: mlops_dev
+  features:
+  - id
+  - Gender
+  - Customer Type
+  - Age
+  - Type of Travel
+  - Class
+  - Flight Distance
+  - Inflight wifi service
+  - Departure/Arrival time convenient
+  - Ease of Online booking
+  - Gate location
+  - Food and drink
+  - Online boarding
+  - Seat comfort
+  - Inflight entertainment
+  - On-board service
+  - Leg room service
+  - Baggage handling
+  - Checkin service
+  - Inflight service
+  - Cleanliness
+  - Departure Delay in Minutes
+  - Arrival Delay in Minutes
+  parameters:
+    learning_rate: 0.01
+    max_depth: 6
+    n_estimators: 1000
+  schema_name: satisfaction_customer
+  target: satisfaction_v2
+__pydantic_extra__: null
+__pydantic_fields_set__: !!set
+  catalog_name: null
+  features: null
+  parameters: null
+  schema_name: null
+  target: null
+__pydantic_private__: null
+
