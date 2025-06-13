@@ -1,15 +1,19 @@
 # Databricks notebook source
+import os
 import mlflow
-from house_price import __version__ as house_price_v
-from house_price.config import ProjectConfig, Tags
-from house_price.models.custom_model import CustomModel
+from satisfaction_customer import __version__ as satisfaction_customer_v
+from satisfaction_customer.config import ProjectConfig, Tags
+from satisfaction_customer.models.custom_model import CustomModel
 from pyspark.sql import SparkSession
 
 # COMMAND ----------
 
 # Default profile:
-mlflow.set_tracking_uri("databricks")
-mlflow.set_registry_uri("databricks-uc")
+
+profile = os.environ["PROFILE"]
+mlflow.set_tracking_uri(f"databricks://{profile}")
+
+mlflow.set_registry_uri(f"databricks-uc://{profile}")
 
 config = ProjectConfig.from_yaml(config_path="../project_config.yml")
 spark = SparkSession.builder.getOrCreate()
@@ -19,7 +23,10 @@ tags = Tags(**{"git_sha": "abcd12345", "branch": "week2"})
 
 # Initialize model with the config path
 custom_model = CustomModel(
-    config=config, tags=tags, spark=spark, code_paths=[f"../dist/house_price-{house_price_v}-py3-none-any.whl"]
+    config=config,
+    tags=tags,
+    spark=spark,
+    code_paths=[f"../dist/satisfaction_customer-{satisfaction_customer_v}-py3-none-any.whl"],
 )
 
 # COMMAND ----------
@@ -31,13 +38,16 @@ custom_model.prepare_features()
 
 # Train + log the model (runs everything including MLflow logging)
 custom_model.train()
+
+# COMMAND ----------
+
 custom_model.log_model()
 
 # COMMAND ----------
 
-run_id = mlflow.search_runs(experiment_names=["/Shared/house-prices-custom"]).run_id[0]
+run_id = mlflow.search_runs(experiment_names=["/Shared/satisfaction-customer-custom"]).run_id[0]
 
-model = mlflow.pyfunc.load_model(f"runs:/{run_id}/pyfunc-house-price-model")
+model = mlflow.pyfunc.load_model(f"runs:/{run_id}/pyfunc-satisfaction-customer-model")
 
 # COMMAND ----------
 

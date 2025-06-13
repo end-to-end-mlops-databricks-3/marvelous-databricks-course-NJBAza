@@ -2,8 +2,8 @@
 
 import pandas as pd
 import pytest
-from house_price import PROJECT_DIR
-from house_price.config import ProjectConfig, Tags
+from satisfaction_customer import PROJECT_DIR
+from satisfaction_customer.config import ProjectConfig, Tags
 from loguru import logger
 from pyspark.sql import SparkSession
 

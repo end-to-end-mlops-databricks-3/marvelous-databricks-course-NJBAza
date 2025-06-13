@@ -3,8 +3,8 @@
 import mlflow
 import pandas as pd
 from conftest import CATALOG_DIR, TRACKING_URI
-from house_price.config import ProjectConfig, Tags
-from house_price.models.custom_model import CustomModel
+from satisfaction_customer.config import ProjectConfig, Tags
+from satisfaction_customer.models.custom_model import CustomModel
 from lightgbm import LGBMRegressor
 from loguru import logger
 from mlflow.entities.model_registry.registered_model import RegisteredModel
@@ -97,7 +97,9 @@ def test_train(mock_custom_model: CustomModel) -> None:
     mock_custom_model.load_data()
     mock_custom_model.prepare_features()
     mock_custom_model.train()
-    expected_feature_names = mock_custom_model.config.num_features + mock_custom_model.config.cat_features
+    expected_feature_names = (
+        mock_custom_model.config.num_features + mock_custom_model.config.cat_features
+    )
 
     assert mock_custom_model.pipeline.n_features_in_ == len(expected_feature_names)
     assert sorted(expected_feature_names) == sorted(mock_custom_model.pipeline.feature_names_in_)
@@ -114,7 +116,9 @@ def test_log_model_with_PandasDataset(mock_custom_model: CustomModel) -> None:
     mock_custom_model.load_data()
     mock_custom_model.prepare_features()
     mock_custom_model.train()
-    expected_feature_names = mock_custom_model.config.num_features + mock_custom_model.config.cat_features
+    expected_feature_names = (
+        mock_custom_model.config.num_features + mock_custom_model.config.cat_features
+    )
 
     assert mock_custom_model.pipeline.n_features_in_ == len(expected_feature_names)
     assert sorted(expected_feature_names) == sorted(mock_custom_model.pipeline.feature_names_in_)

@@ -1,6 +1,6 @@
 [project]
-name = "mlops-course"
-description = "MLOps with Databricks course"
+name = "satisfaction-customer"
+description = "MLOps with Databricks course-Own project"
 requires-python = ">=3.11, <3.12"
 dependencies = [
     "mlflow==2.15.1",

@@ -1,8 +1,9 @@
 # Databricks notebook source
 import mlflow
 from dotenv import load_dotenv
-from house_price.config import ProjectConfig, Tags
-from house_price.models.basic_model import BasicModel
+import os
+from satisfaction_customer.config import ProjectConfig, Tags
+from satisfaction_customer.models.basic_model import BasicModel
 from marvelous.common import is_databricks
 from pyspark.sql import SparkSession
 
@@ -18,7 +19,7 @@ if not is_databricks():
     mlflow.set_registry_uri(f"databricks-uc://{profile}")
 
 
-config = ProjectConfig.from_yaml(config_path="../project_config.yml", env="prd")
+config = ProjectConfig.from_yaml(config_path="../project_config.yml", env="dev")
 spark = SparkSession.builder.getOrCreate()
 tags = Tags(**{"git_sha": "abcd12345", "branch": "week2"})
 
@@ -30,21 +31,29 @@ basic_model = BasicModel(config=config, tags=tags, spark=spark)
 # COMMAND ----------
 
 basic_model.load_data()
+
+# COMMAND ----------
+
 basic_model.prepare_features()
 
 # COMMAND ----------
 
-# Train + log the model (runs everything including MLflow logging)
+# Train
 basic_model.train()
+
+# COMMAND ----------
+
+# log the model (runs everything including MLflow logging)
+
 basic_model.log_model()
 
 # COMMAND ----------
 
 run_id = mlflow.search_runs(
-    experiment_names=["/Shared/house-prices-basic"], filter_string="tags.branch='week2'"
+    experiment_names=["/Shared/satisfaction-customer-basic"], filter_string="tags.branch='week2'"
 ).run_id[0]
 
-model = mlflow.sklearn.load_model(f"runs:/{run_id}/lightgbm-pipeline-model")
+model = mlflow.sklearn.load_model(f"runs:/{run_id}/logregression-model")
 
 # COMMAND ----------
 
@@ -67,6 +76,6 @@ basic_model.register_model()
 
 test_set = spark.table(f"{config.catalog_name}.{config.schema_name}.test_set").limit(10)
 
-X_test = test_set.drop(config.target).toPandas()
+X_test = test_set.drop(config.target).toPandas().select_dtypes(exclude=["datetime64"])
 
 predictions_df = basic_model.load_latest_model_and_predict(X_test)

@@ -9,9 +9,9 @@ from unittest.mock import MagicMock
 import pandas as pd
 import pytest
 from conftest import CATALOG_DIR, MLRUNS_DIR
-from house_price import PROJECT_DIR
-from house_price.config import ProjectConfig, Tags
-from house_price.models.custom_model import CustomModel
+from satisfaction_customer import PROJECT_DIR
+from satisfaction_customer.config import ProjectConfig, Tags
+from satisfaction_customer.models.custom_model import CustomModel
 from loguru import logger
 from pyspark.sql import SparkSession
 
@@ -90,7 +90,9 @@ def build_whl_file() -> None:
 
 
 @pytest.fixture(scope="function")
-def mock_custom_model(config: ProjectConfig, tags: Tags, spark_session: SparkSession) -> CustomModel:
+def mock_custom_model(
+    config: ProjectConfig, tags: Tags, spark_session: SparkSession
+) -> CustomModel:
     """Fixture that provides a CustomModel instance with mocked Spark interactions.
 
     Initializes the model with test data and mocks Spark DataFrame conversions to pandas.
