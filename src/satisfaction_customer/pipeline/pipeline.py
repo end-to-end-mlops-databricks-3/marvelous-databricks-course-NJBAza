@@ -1,37 +1,32 @@
-import os
-import sys
-from pathlib import Path
-
 from sklearn.pipeline import Pipeline
 
 # Assuming 'prediction_model' is in the parent directory
-PACKAGE_ROOT = Path(os.path.abspath(os.path.dirname(__file__))).parent
-sys.path.append(str(PACKAGE_ROOT.parent))
-
-sys.path.append(str(Path.cwd().parent / "src"))
-
-import processing.preprocessing as pp
-from config import config
+from satisfaction_customer.processing import preprocessing as pp
+from satisfaction_customer.settings import settings
 
 RANDOM_SEED = 20230916
 
-classification_pipeline = Pipeline(
+transform_pipeline = Pipeline(
     [
         (
             "DataFrameTypeConverter",
-            pp.DataFrameTypeConverter(conversion_dict=config.CONVERSION_DICT),
+            pp.DataFrameTypeConverter(conversion_dict=settings.CONVERSION_DICT),
         ),
         (
             "DropColumns",
-            pp.DropColumns(variables_to_drop=config.VARIABLES_TO_DROP),
+            pp.DropColumns(variables_to_drop=settings.VARIABLES_TO_DROP),
+        ),
+        (
+            "DropDuplicatesTransformer",
+            pp.DropDuplicatesTransformer(),
         ),
         (
             "ModeImputer",
-            pp.ModeImputer(variables=config.CATEGORICAL_FEATURES),
+            pp.ModeImputer(variables=settings.CATEGORICAL_FEATURES),
         ),
         (
             "MedianImputer",
-            pp.MedianImputer(variables=config.NUMERICAL_FEATURES0),
+            pp.MedianImputer(variables=settings.NUMERICAL_FEATURES0),
         ),
         (
             "FeatureCreator",
@@ -39,11 +34,15 @@ classification_pipeline = Pipeline(
         ),
         (
             "Winsorizer",
-            pp.Winsorizer(numerical_features=config.NUMERICAL_FEATURES2, limits=[0.025, 0.025]),
+            pp.Winsorizer(numerical_features=settings.NUMERICAL_FEATURES2, limits=[0.025, 0.025]),
         ),
         (
             "Chosen",
-            pp.ChosenFeatures(columns=config.NUMERICAL_FEATURES_3 + config.CATEGORICAL_FEATURES),
+            pp.ChosenFeatures(
+                columns=settings.NUMERICAL_FEATURES_3
+                + settings.CATEGORICAL_FEATURES
+                + [settings.TARGET]
+            ),
         ),
         (
             "LogTransforms",
@@ -75,26 +74,15 @@ classification_pipeline = Pipeline(
         ),
         (
             "OneHotEncoderProcessor3",
-            pp.OneHotEncoderProcessor(columns=config.FEATURES_ONE_HOT, prefix="Class"),
+            pp.OneHotEncoderProcessor(columns=settings.FEATURES_ONE_HOT, prefix="Class"),
         ),
         (
             "DataFrameTypeConverter2",
-            pp.DataFrameTypeConverter(conversion_dict=config.CONVERSION_DICT2),
+            pp.DataFrameTypeConverter(conversion_dict=settings.CONVERSION_DICT2),
         ),
         (
             "DropColumns2",
-            pp.DropColumns(variables_to_drop=config.TO_DROP),
-        ),
-        (
-            "Logistic",
-            LogisticRegression(
-                solver="liblinear",
-                class_weight="balanced",
-                penalty="l1",
-                max_iter=200,
-                C=0.01,
-                random_state=RANDOM_SEED,
-            ),
+            pp.DropColumns(variables_to_drop=settings.TO_DROP),
         ),
     ]
 )

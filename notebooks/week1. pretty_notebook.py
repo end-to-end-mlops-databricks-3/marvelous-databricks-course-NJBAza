@@ -13,6 +13,10 @@ print(sys.version)
 
 # COMMAND ----------
 
+# MAGIC %pip list
+
+# COMMAND ----------
+
 # MAGIC %pip install -e ..
 
 # COMMAND ----------
@@ -31,11 +35,15 @@ url = f"git+https://{token}@github.com/end-to-end-mlops-databricks-3/marvelous@0
 
 from pathlib import Path
 import sys
-sys.path.append(str(Path.cwd().parent / 'src'))
-
+PACKAGE_ROOT = Path.cwd().parent
+sys.path.append(str(PACKAGE_ROOT / "src"))
 print("Current working directory:", Path.cwd())
 print("Parent directory:", Path.cwd().parent)
 print("Target src path added:", Path.cwd().parent / 'src')
+
+print(PACKAGE_ROOT)
+DATAPATH = PACKAGE_ROOT/"data"
+print(DATAPATH)
 
 # COMMAND ----------
 
@@ -43,6 +51,10 @@ import pandas as pd
 import yaml
 from satisfaction_customer.config import ProjectConfig
 from satisfaction_customer.data_processor import DataProcessor
+from satisfaction_customer.pipeline.pipeline import transform_pipeline
+from satisfaction_customer.processing import preprocessing as pp
+from satisfaction_customer.settings import settings
+from sklearn.pipeline import Pipeline
 from loguru import logger
 from marvelous.logging import setup_logging
 from marvelous.timer import Timer
@@ -57,26 +69,31 @@ logger.info(yaml.dump(config, default_flow_style=False))
 
 # COMMAND ----------
 
-# Load the house prices dataset
+# Load the satisfaction customer dataset
 spark = SparkSession.builder.getOrCreate()
 
-filepath = "../data/data.csv"
+filepath = DATAPATH / "data.csv"
 
 # Load the data
 df = pd.read_csv(filepath)
 
+# COMMAND ----------
+
+df.head()
 
 # COMMAND ----------
 
-# Load the house prices dataset
+df.shape
+
+# COMMAND ----------
+
+# Creating the data processor object
 with Timer() as preprocess_timer:
     # Initialize DataProcessor
-    data_processor = DataProcessor(df, config, spark)
+    data_processor = DataProcessor(df, transform_pipeline, spark, config)
 
-    # Preprocess the data
-    data_processor.preprocess()
-
-logger.info(f"Data preprocessing: {preprocess_timer}")
+logger.info(f"Data preprocessing: {data_processor}")
+print(f"The original data {data_processor}")
 
 # COMMAND ----------
 
@@ -84,6 +101,10 @@ logger.info(f"Data preprocessing: {preprocess_timer}")
 X_train, X_test = data_processor.split_data()
 logger.info("Training set shape: %s", X_train.shape)
 logger.info("Test set shape: %s", X_test.shape)
+
+# COMMAND ----------
+
+X_train
 
 # COMMAND ----------
 

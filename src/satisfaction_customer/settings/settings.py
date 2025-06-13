@@ -1,11 +1,12 @@
 import os
 import pickle
-import sys
 from pathlib import Path
 
-PACKAGE_ROOT = Path(os.path.abspath(os.path.dirname(__file__))).parent
-sys.path.append(str(PACKAGE_ROOT.parent))
-DATAPATH = os.path.join(PACKAGE_ROOT, "data")
+# PACKAGE_ROOT = Path(os.path.abspath(os.path.dirname(__file__))).parent
+# sys.path.append(str(PACKAGE_ROOT.parent))
+
+PACKAGE_ROOT = Path(__file__).resolve().parents[3]
+DATAPATH = PACKAGE_ROOT / "data"
 
 FILE_NAME = "satisfaction.csv"
 VALIDATION_FILE = "test_data.csv"
