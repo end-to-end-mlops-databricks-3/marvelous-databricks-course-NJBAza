@@ -51,10 +51,7 @@ import pandas as pd
 import yaml
 from satisfaction_customer.config import ProjectConfig
 from satisfaction_customer.data_processor import DataProcessor
-from satisfaction_customer.pipeline.pipeline import transform_pipeline
-from satisfaction_customer.processing import preprocessing as pp
-from satisfaction_customer.settings import settings
-from sklearn.pipeline import Pipeline
+from satisfaction_customer.pipeline.pipeline import preprocess_pipeline
 from loguru import logger
 from marvelous.logging import setup_logging
 from marvelous.timer import Timer
@@ -90,7 +87,7 @@ df.shape
 # Creating the data processor object
 with Timer() as preprocess_timer:
     # Initialize DataProcessor
-    data_processor = DataProcessor(df, transform_pipeline, spark, config)
+    data_processor = DataProcessor(df, preprocess_pipeline, spark, config)
 
 logger.info(f"Data preprocessing: {data_processor}")
 print(f"The original data {data_processor}")
@@ -108,9 +105,32 @@ X_train
 
 # COMMAND ----------
 
+# Show available catalogs
+spark.sql("SHOW CATALOGS").show()
+
+# Use your target catalog and schema
+spark.sql("USE CATALOG mlops_dev")
+spark.sql("SHOW SCHEMAS IN mlops_dev").show()
+
+spark.sql("USE SCHEMA njavierb")
+
+spark.sql("SELECT current_catalog(), current_schema()").show()
+
+spark.sql("DROP TABLE IF EXISTS mlops_dev.njavierb.train_set")
+spark.sql("DROP TABLE IF EXISTS mlops_dev.njavierb.test_set")
+
+# COMMAND ----------
+
+spark.catalog.tableExists("mlops_dev.njavierb.train_set")
+spark.sql("SHOW TABLES IN mlops_dev.njavierb").show()
+
+# COMMAND ----------
+
 # Save to catalog
 logger.info("Saving data to catalog")
 data_processor.save_to_catalog(X_train, X_test)
+
+# COMMAND ----------
 
 # Enable change data feed (only once!)
 logger.info("Enable change data feed")

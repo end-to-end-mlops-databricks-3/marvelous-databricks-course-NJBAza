@@ -12,7 +12,6 @@ from pyspark.sql import SparkSession
 
 profile = os.environ["PROFILE"]
 mlflow.set_tracking_uri(f"databricks://{profile}")
-
 mlflow.set_registry_uri(f"databricks-uc://{profile}")
 
 config = ProjectConfig.from_yaml(config_path="../project_config.yml")

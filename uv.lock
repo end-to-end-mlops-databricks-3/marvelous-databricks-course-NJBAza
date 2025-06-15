@@ -1158,83 +1158,6 @@ databricks = [
 ]
 
 [[package]]
-name = "mlops-course"
-source = { editable = "." }
-dependencies = [
-    { name = "cffi" },
-    { name = "cloudpickle" },
-    { name = "databricks-feature-engineering" },
-    { name = "databricks-feature-lookup" },
-    { name = "databricks-sdk" },
-    { name = "loguru" },
-    { name = "matplotlib" },
-    { name = "mlflow" },
-    { name = "numpy" },
-    { name = "pandas" },
-    { name = "psutil" },
-    { name = "pyarrow" },
-    { name = "pydantic" },
-    { name = "python-dotenv" },
-    { name = "scikit-learn" },
-    { name = "scipy" },
-    { name = "xgboost" },
-]
-
-[package.optional-dependencies]
-dev = [
-    { name = "databricks-connect" },
-    { name = "ipykernel" },
-    { name = "marvelous" },
-    { name = "pip" },
-    { name = "pre-commit" },
-    { name = "pytest" },
-]
-test = [
-    { name = "delta-spark" },
-    { name = "marvelous" },
-    { name = "pre-commit" },
-    { name = "pydantic-settings" },
-    { name = "pyspark" },
-    { name = "pytest" },
-    { name = "pytest-cov" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "cffi", specifier = "==1.17.1" },
-    { name = "cloudpickle", specifier = "==3.1.0" },
-    { name = "databricks-connect", marker = "extra == 'dev'", specifier = "==15.4.5" },
-    { name = "databricks-feature-engineering", specifier = "==0.6" },
-    { name = "databricks-feature-lookup", specifier = "==1.2.0" },
-    { name = "databricks-sdk", specifier = "==0.32.0" },
-    { name = "delta-spark", marker = "extra == 'test'", specifier = "==3.3.0" },
-    { name = "ipykernel", marker = "extra == 'dev'", specifier = ">=6.29.5,<7" },
-    { name = "loguru", specifier = "==0.7.3" },
-    { name = "marvelous", marker = "extra == 'dev'", git = "https://github.com/end-to-end-mlops-databricks-3/marvelous?rev=0.1.0" },
-    { name = "marvelous", marker = "extra == 'test'", git = "https://github.com/end-to-end-mlops-databricks-3/marvelous?rev=0.1.0" },
-    { name = "matplotlib", specifier = "==3.7.5" },
-    { name = "mlflow", specifier = "==2.15.1" },
-    { name = "numpy", specifier = "==1.24.4" },
-    { name = "pandas", specifier = "==2.0.2" },
-    { name = "pip", marker = "extra == 'dev'", specifier = ">=24.2" },
-    { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=4.1.0,<5" },
-    { name = "pre-commit", marker = "extra == 'test'", specifier = ">=4.1.0,<5" },
-    { name = "psutil", specifier = "==6.0.0" },
-    { name = "pyarrow", specifier = "==14.0.1" },
-    { name = "pydantic", specifier = "==2.9.2" },
-    { name = "pydantic-settings", marker = "extra == 'test'", specifier = ">=2.8.1" },
-    { name = "pyspark", marker = "extra == 'test'", specifier = "==3.5.5" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.4,<9" },
-    { name = "pytest", marker = "extra == 'test'", specifier = ">=8.3.5" },
-    { name = "pytest-cov", marker = "extra == 'test'", specifier = ">=6.1.0" },
-    { name = "python-dotenv", specifier = ">=1.1.0" },
-    { name = "scikit-learn", specifier = "==1.3.2" },
-    { name = "scipy", specifier = "==1.14.1" },
-    { name = "xgboost", specifier = "==2.1.1" },
-]
-provides-extras = ["dev", "test"]
-
-[[package]]
 name = "nest-asyncio"
 version = "1.6.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1264,15 +1187,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/22/97/dfb1a31bb46686f09e68ea6ac5c63fdee0d22d7b23b8f3f7ea07712869ef/numpy-1.24.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7215847ce88a85ce39baf9e89070cb860c98fdddacbaa6c0da3ffb31b3350bd5", size = 17278923, upload-time = "2023-06-26T13:26:25.658Z" },
     { url = "https://files.pythonhosted.org/packages/35/e2/76a11e54139654a324d107da1d98f99e7aa2a7ef97cfd7c631fba7dbde71/numpy-1.24.4-cp311-cp311-win32.whl", hash = "sha256:4979217d7de511a8d57f4b4b5b2b965f707768440c17cb70fbf254c4b225238d", size = 12422446, upload-time = "2023-06-26T13:26:49.302Z" },
     { url = "https://files.pythonhosted.org/packages/d8/ec/ebef2f7d7c28503f958f0f8b992e7ce606fb74f9e891199329d5f5f87404/numpy-1.24.4-cp311-cp311-win_amd64.whl", hash = "sha256:b7b1fc9864d7d39e28f41d089bfd6353cb5f27ecd9905348c24187a768c79694", size = 14834466, upload-time = "2023-06-26T13:27:16.029Z" },
-]
-
-[[package]]
-name = "nvidia-nccl-cu12"
-version = "2.26.5"
-source = { registry = "https://pypi.org/simple" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/55/66/ed9d28946ead0fe1322df2f4fc6ea042340c0fe73b79a1419dc1fdbdd211/nvidia_nccl_cu12-2.26.5-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:adb1bf4adcc5a47f597738a0700da6aef61f8ea4251b375540ae138c7d239588", size = 318058262, upload-time = "2025-05-02T23:32:43.197Z" },
-    { url = "https://files.pythonhosted.org/packages/48/fb/ec4ac065d9b0d56f72eaf1d9b0df601e33da28197b32ca351dc05b342611/nvidia_nccl_cu12-2.26.5-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:ea5ed3e053c735f16809bee7111deac62ac35b10128a8c102960a0462ce16cbe", size = 318069637, upload-time = "2025-05-02T23:33:18.306Z" },
 ]
 
 [[package]]
@@ -1813,6 +1727,81 @@ wheels = [
 ]
 
 [[package]]
+name = "satisfaction-customer"
+source = { editable = "." }
+dependencies = [
+    { name = "cffi" },
+    { name = "cloudpickle" },
+    { name = "databricks-feature-engineering" },
+    { name = "databricks-feature-lookup" },
+    { name = "databricks-sdk" },
+    { name = "loguru" },
+    { name = "matplotlib" },
+    { name = "mlflow" },
+    { name = "numpy" },
+    { name = "pandas" },
+    { name = "psutil" },
+    { name = "pyarrow" },
+    { name = "pydantic" },
+    { name = "python-dotenv" },
+    { name = "scikit-learn" },
+    { name = "scipy" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "databricks-connect" },
+    { name = "ipykernel" },
+    { name = "marvelous" },
+    { name = "pip" },
+    { name = "pre-commit" },
+    { name = "pytest" },
+]
+test = [
+    { name = "delta-spark" },
+    { name = "marvelous" },
+    { name = "pre-commit" },
+    { name = "pydantic-settings" },
+    { name = "pyspark" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cffi", specifier = "==1.17.1" },
+    { name = "cloudpickle", specifier = "==3.1.0" },
+    { name = "databricks-connect", marker = "extra == 'dev'", specifier = "==15.4.5" },
+    { name = "databricks-feature-engineering", specifier = "==0.6" },
+    { name = "databricks-feature-lookup", specifier = "==1.2.0" },
+    { name = "databricks-sdk", specifier = "==0.32.0" },
+    { name = "delta-spark", marker = "extra == 'test'", specifier = "==3.3.0" },
+    { name = "ipykernel", marker = "extra == 'dev'", specifier = ">=6.29.5,<7" },
+    { name = "loguru", specifier = "==0.7.3" },
+    { name = "marvelous", marker = "extra == 'dev'", git = "https://github.com/end-to-end-mlops-databricks-3/marvelous?rev=0.1.0" },
+    { name = "marvelous", marker = "extra == 'test'", git = "https://github.com/end-to-end-mlops-databricks-3/marvelous?rev=0.1.0" },
+    { name = "matplotlib", specifier = "==3.7.5" },
+    { name = "mlflow", specifier = "==2.15.1" },
+    { name = "numpy", specifier = "==1.24.4" },
+    { name = "pandas", specifier = "==2.0.2" },
+    { name = "pip", marker = "extra == 'dev'", specifier = ">=24.2" },
+    { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=4.1.0,<5" },
+    { name = "pre-commit", marker = "extra == 'test'", specifier = ">=4.1.0,<5" },
+    { name = "psutil", specifier = "==6.0.0" },
+    { name = "pyarrow", specifier = "==14.0.1" },
+    { name = "pydantic", specifier = "==2.9.2" },
+    { name = "pydantic-settings", marker = "extra == 'test'", specifier = ">=2.8.1" },
+    { name = "pyspark", marker = "extra == 'test'", specifier = "==3.5.5" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.4,<9" },
+    { name = "pytest", marker = "extra == 'test'", specifier = ">=8.3.5" },
+    { name = "pytest-cov", marker = "extra == 'test'", specifier = ">=6.1.0" },
+    { name = "python-dotenv", specifier = ">=1.1.0" },
+    { name = "scikit-learn", specifier = "==1.3.2" },
+    { name = "scipy", specifier = "==1.14.1" },
+]
+provides-extras = ["dev", "test"]
+
+[[package]]
 name = "scikit-learn"
 version = "1.3.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2087,26 +2076,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/8f/fa/9fb6e594f2ce03ef03eddbdb5f4f90acb1452221a5351116c7c4708ac865/wrapt-1.17.2-cp311-cp311-win32.whl", hash = "sha256:4afd5814270fdf6380616b321fd31435a462019d834f83c8611a0ce7484c7317", size = 36419, upload-time = "2025-01-14T10:33:53.551Z" },
     { url = "https://files.pythonhosted.org/packages/47/f8/fb1773491a253cbc123c5d5dc15c86041f746ed30416535f2a8df1f4a392/wrapt-1.17.2-cp311-cp311-win_amd64.whl", hash = "sha256:acc130bc0375999da18e3d19e5a86403667ac0c4042a094fefb7eec8ebac7cf3", size = 38773, upload-time = "2025-01-14T10:33:56.323Z" },
     { url = "https://files.pythonhosted.org/packages/2d/82/f56956041adef78f849db6b289b282e72b55ab8045a75abad81898c28d19/wrapt-1.17.2-py3-none-any.whl", hash = "sha256:b18f2d1533a71f069c7f82d524a52599053d4c7166e9dd374ae2136b7f40f7c8", size = 23594, upload-time = "2025-01-14T10:35:44.018Z" },
-]
-
-[[package]]
-name = "xgboost"
-version = "2.1.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "numpy" },
-    { name = "nvidia-nccl-cu12", marker = "platform_machine != 'aarch64' and sys_platform == 'linux'" },
-    { name = "scipy" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/fa/34/61667c6b7f997dd7018b095562c718b41f9d1ece9b42047438a0ad12c4f5/xgboost-2.1.1.tar.gz", hash = "sha256:4b1729837f9f1ba88a32ef1be3f8efb860fee6454a68719b196dc88032c23d97", size = 1089959, upload-time = "2024-07-31T08:28:34.769Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c4/41/f0980f72531ab8e1fdbeb2643c32f6bcc7e8777fa49e362f94d728887a58/xgboost-2.1.1-py3-none-macosx_10_15_x86_64.macosx_11_0_x86_64.macosx_12_0_x86_64.whl", hash = "sha256:4163ab55118628f605cfccf950e2d667150640f6fc746bb5a173bddfd935950f", size = 2139617, upload-time = "2024-07-31T08:14:26.599Z" },
-    { url = "https://files.pythonhosted.org/packages/99/a1/5219921a9bcb5388623f81908ff43d606aec2e512e0c02f6eb49f3b3caa8/xgboost-2.1.1-py3-none-macosx_12_0_arm64.whl", hash = "sha256:40d1f647022f497c1b0f69073765baf50ff5802ca77c6bb1aca55a6bc65df00d", size = 1938081, upload-time = "2024-07-31T08:14:29.864Z" },
-    { url = "https://files.pythonhosted.org/packages/85/57/15b518d07abf1b264e3c8a788099173fa791dbca6884b121948527c2a946/xgboost-2.1.1-py3-none-manylinux2014_aarch64.whl", hash = "sha256:4c534818aa08ab327ac2239ef211ef78db65a8573d069bc9898f824830fa2308", size = 4439859, upload-time = "2024-07-31T08:14:34.473Z" },
-    { url = "https://files.pythonhosted.org/packages/ac/91/fdbd611bfa9a2c91001ccbbc32b3717d370551a98d083fd0a0bbfcb4b537/xgboost-2.1.1-py3-none-manylinux2014_x86_64.whl", hash = "sha256:deef471e8d353afa99e5cc0e2af7d99ace7013f40684fcf3eed9124de033265d", size = 4529417, upload-time = "2024-07-31T08:14:39.082Z" },
-    { url = "https://files.pythonhosted.org/packages/65/8e/3971d9b26dbf419a62d77f7b577281f950d6d8d0defdab0c4b61bb02c4ae/xgboost-2.1.1-py3-none-manylinux_2_28_aarch64.whl", hash = "sha256:8f3246a6d839dceb4553d3e5ea64ed718f9c692f072ee8275eeb895b58e283e6", size = 4200376, upload-time = "2024-07-31T08:14:44.972Z" },
-    { url = "https://files.pythonhosted.org/packages/20/2f/2ccc91db71096cdb8c5174948db738075d7e38cfece0815500336f6e4ca8/xgboost-2.1.1-py3-none-manylinux_2_28_x86_64.whl", hash = "sha256:6475ca35dede1f87d1dc485b362caba08f69f6020f4440e97b167676a533850e", size = 153883159, upload-time = "2024-07-31T08:24:53.853Z" },
-    { url = "https://files.pythonhosted.org/packages/e2/7b/8c1b410cd0604cee9a167a19f7e1746f5b92ae7d02ad574ab560b73c5a48/xgboost-2.1.1-py3-none-win_amd64.whl", hash = "sha256:fcf8413f3c621e97fdaaa45abb7ae808319c88eff5447328eff14c419c7c6ae0", size = 124902746, upload-time = "2024-07-31T08:28:01.68Z" },
 ]
 
 [[package]]

@@ -6,7 +6,7 @@ from satisfaction_customer.settings import settings
 
 RANDOM_SEED = 20230916
 
-transform_pipeline = Pipeline(
+preprocess_pipeline = Pipeline(
     [
         (
             "DataFrameTypeConverter",
@@ -28,6 +28,11 @@ transform_pipeline = Pipeline(
             "MedianImputer",
             pp.MedianImputer(variables=settings.NUMERICAL_FEATURES0),
         ),
+    ]
+)
+
+pretrain_pipeline = Pipeline(
+    [
         (
             "FeatureCreator",
             pp.FeatureCreator(),

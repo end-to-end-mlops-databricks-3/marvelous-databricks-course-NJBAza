@@ -41,8 +41,8 @@ class DataProcessor:
 
     def transform(self) -> pd.DataFrame:
         """Apply the pipeline's fit_transform to the internal DataFrame."""
-        df_transformed = self.pipeline.fit_transform(self.df)
-        return df_transformed
+        df_preprocess = self.pipeline.fit_transform(self.df)
+        return df_preprocess
 
     def split_data(
         self, test_size: float = 0.2, random_state: int = RANDOM_SEED
@@ -64,54 +64,41 @@ class DataProcessor:
             X_train, X_test
 
         """
-        df_transformed = self.pipeline.fit_transform(self.df)
+        df_preprocess = self.pipeline.fit_transform(self.df)
         train_set, test_set = train_test_split(
-            df_transformed, test_size=test_size, random_state=random_state
+            df_preprocess, test_size=test_size, random_state=random_state
         )
         return train_set, test_set
 
-    def _sanitize_column_names(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Sanitize column names for Delta Lake compatibility."""
-        df.columns = [
-            col.strip().replace(" ", "_").replace("(", "").replace(")", "").replace("\n", "")
-            for col in df.columns
-        ]
-        return df
-
     def save_to_catalog(self, train_set: pd.DataFrame, test_set: pd.DataFrame) -> None:
-        """Save the train and test sets into Databricks tables."""
+        """Drop and save the train and test sets into Databricks tables.
 
-        # 🧼 Clean column names
-        train_set = self._sanitize_column_names(train_set)
-        test_set = self._sanitize_column_names(test_set)
+        :param train_set: The training DataFrame to be saved.
+        :param test_set: The test DataFrame to be saved.
+        """
 
-        # Convert to Spark DataFrames
+        self.spark.sql(
+            f"DROP TABLE IF EXISTS {self.config.catalog_name}.{self.config.schema_name}.train_set"
+        )
+        self.spark.sql(
+            f"DROP TABLE IF EXISTS {self.config.catalog_name}.{self.config.schema_name}.test_set"
+        )
+
         train_set_with_timestamp = self.spark.createDataFrame(train_set).withColumn(
             "update_timestamp_utc", to_utc_timestamp(current_timestamp(), "UTC")
         )
+
         test_set_with_timestamp = self.spark.createDataFrame(test_set).withColumn(
             "update_timestamp_utc", to_utc_timestamp(current_timestamp(), "UTC")
         )
 
-        # Catalog/table path
-        catalog = self.config.catalog_name
-        schema = self.config.schema_name
-        full_train_table = f"{catalog}.{schema}.train_set"
-        full_test_table = f"{catalog}.{schema}.test_set"
-
-        print(f"Saving training data to: {full_train_table}")
-        print(f"Saving test data to: {full_test_table}")
-
-        # Ensure context
-        self.spark.sql(f"USE CATALOG {catalog}")
-        self.spark.sql(f"USE SCHEMA {schema}")
-
-        # Save
-        train_set_with_timestamp.write.mode("overwrite").format("delta").saveAsTable(
-            full_train_table
+        # 🔧 Explicit format + overwrite
+        train_set_with_timestamp.write.format("delta").mode("overwrite").saveAsTable(
+            f"{self.config.catalog_name}.{self.config.schema_name}.train_set"
         )
-        test_set_with_timestamp.write.mode("overwrite").format("delta").saveAsTable(
-            full_test_table
+
+        test_set_with_timestamp.write.format("delta").mode("overwrite").saveAsTable(
+            f"{self.config.catalog_name}.{self.config.schema_name}.test_set"
         )
 
     def enable_change_data_feed(self) -> None:

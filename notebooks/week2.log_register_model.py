@@ -32,8 +32,6 @@ from pyspark.sql import SparkSession
 import mlflow
 
 from satisfaction_customer.config import ProjectConfig
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from mlflow.models import infer_signature
 from marvelous.common import is_databricks
@@ -221,7 +219,7 @@ with mlflow.start_run(tags={"branch": "week2", "git_sha": "1234567890abcd"}) as 
 from satisfaction_customer.utils import adjust_predictions
 
 
-class HousePriceModelWrapper2(mlflow.pyfunc.PythonModel):
+class SatisfactionCustomerModelWrapper2(mlflow.pyfunc.PythonModel):
 
     def load_context(self, context):
         self.model = mlflow.sklearn.load_model(context.artifacts["logregression-model"])
@@ -249,8 +247,8 @@ with mlflow.start_run(tags={"branch": "week2", "git_sha": "1234567890abcd"}) as 
         additional_conda_channels=None,
     )
     mlflow.pyfunc.log_model(
-        python_model=HousePriceModelWrapper2(),
-        artifact_path="pyfunc-house-price-model",
+        python_model=SatisfactionCustomerModelWrapper2(),
+        artifact_path="pyfunc-satisfaction-customer-model",
         artifacts={"logregression-model": f"models:/{model_name}@latest-model"},
         code_paths=[f"../dist/satisfaction_customer-{__version__}-py3-none-any.whl"],
         signature=signature,
@@ -262,7 +260,7 @@ run_id
 
 # COMMAND ----------
 
-pyfunc_model = mlflow.pyfunc.load_model(f"runs:/{run_id}/pyfunc-house-price-model")
+pyfunc_model = mlflow.pyfunc.load_model(f"runs:/{run_id}/pyfunc-satisfaction-customer-model")
 
 # COMMAND ----------
 
