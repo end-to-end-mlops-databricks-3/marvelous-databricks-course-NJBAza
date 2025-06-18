@@ -17,7 +17,8 @@ url = f"git+https://oauth:{token}@github.com/end-to-end-mlops-databricks-3/marve
 # caution! This is not a great approach
 from pathlib import Path
 import sys
-sys.path.append(str(Path.cwd().parent / 'src'))
+PACKAGE_ROOT = Path.cwd().parent
+sys.path.append(str(PACKAGE_ROOT / "src"))
 
 # COMMAND ----------
 
@@ -41,6 +42,7 @@ import os
 from mlflow import MlflowClient
 import pandas as pd
 from satisfaction_customer import __version__
+from satisfaction_customer.pipeline.pipeline import (preprocess_pipeline, pretrain_pipeline)
 from mlflow.utils.environment import _mlflow_conda_env
 from databricks import feature_engineering
 from databricks.feature_engineering import FeatureFunction, FeatureLookup
@@ -192,14 +194,12 @@ spark.sql("SELECT mlops_dev.njavierb.calculate_delay_ratio_demo(10, 5) AS delay_
 from pyspark.sql.functions import col
 from pyspark.sql.types import DoubleType
 
-# ✅ Step 1: Explicitly cast before dropping
 train_set = (
     train_set
     .withColumn("departure_delay_in_minutes", col("departure_delay_in_minutes").cast(DoubleType()))
     .withColumn("arrival_delay_in_minutes", col("arrival_delay_in_minutes").cast(DoubleType()))
 )
 
-# ✅ Step 2: Print schema to confirm
 train_set.select("departure_delay_in_minutes", "arrival_delay_in_minutes").printSchema()
 
 
@@ -241,14 +241,32 @@ y_train = training_df[config.target]
 
 # COMMAND ----------
 
+full_preprocessing = Pipeline(
+    steps=preprocess_pipeline.steps + pretrain_pipeline.steps
+)
+
+# COMMAND ----------
+
+import os
+import pickle
+
+DATAPATH = PACKAGE_ROOT/"data"
+RANDOM_SEED = 20230916
+
+with open(os.path.join(DATAPATH, "ORIGINAL_FEATURES"), "rb") as fp1:
+    conversion_dict = pickle.load(fp1)
+
+print(conversion_dict)
+
+
+# COMMAND ----------
+
 pipeline = Pipeline(
-        steps=[("preprocessor", ColumnTransformer(
-            transformers=[("cat", OneHotEncoder(handle_unknown="ignore"),
-                           config.cat_features)],
-            remainder="passthrough")
-            ),
-               ("regressor", LGBMRegressor(**config.parameters))]
-        )
+    steps=[
+        ("preprocessor", full_preprocessing),
+        ("classifier", LogisticRegression(**config.parameters, random_state=RANDOM_SEED)),
+    ]
+)
 
 pipeline.fit(X_train, y_train)
 
