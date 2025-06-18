@@ -9,6 +9,7 @@ from satisfaction_customer.processing.data_handling import save_pipeline
 
 RANDOM_SEED = 20230916
 
+RANDOM_SEED = 20230916
 
 class DataProcessor:
     """A class to manage training, prediction, and integration of an sklearn pipeline with Databricks.

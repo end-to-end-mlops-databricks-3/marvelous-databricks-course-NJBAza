@@ -4,11 +4,12 @@
 token = dbutils.secrets.get("my-secrets", "GIT_TOKEN")
 url = f"git+https://oauth:{token}@github.com/end-to-end-mlops-databricks-3/marvelous@0.1.0"
 %pip install $url
+#restart python
+%restart_python
 
 # COMMAND ----------
 
-#restart python
-%restart_python
+# MAGIC %pip list
 
 # COMMAND ----------
 
@@ -21,7 +22,7 @@ sys.path.append(str(Path.cwd().parent / 'src'))
 # COMMAND ----------
 
 # A better approach (this file must be present in a notebook folder, achieved via synchronization)
-%pip install house_price-1.0.1-py3-none-any.whl
+#%pip install satisfaction_customer-1.0.1-py3-none-any.whl
 
 # COMMAND ----------
 
@@ -44,6 +45,7 @@ from mlflow.utils.environment import _mlflow_conda_env
 from databricks import feature_engineering
 from databricks.feature_engineering import FeatureFunction, FeatureLookup
 from pyspark.errors import AnalysisException
+from pyspark.sql.functions import col
 import numpy as np
 from datetime import datetime
 import boto3
@@ -72,51 +74,55 @@ test_set = spark.table(f"{config.catalog_name}.{config.schema_name}.test_set")
 
 # create feature table with information about houses
 
-feature_table_name = f"{config.catalog_name}.{config.schema_name}.house_features_demo"
-lookup_features = ["OverallQual", "GrLivArea", "GarageCars"]
+feature_table_name = f"{config.catalog_name}.{config.schema_name}.satisfaction_customer_demo"
+lookup_features = ["flight_distance", "arrival_delay_in_minutes", "type_of_travel", "online_boarding"]
 
 
 # COMMAND ----------
 
-# Option 1: feature engineering client
-feature_table = fe.create_table(
-   name=feature_table_name,
-   primary_keys=["Id"],
-   df=train_set[["Id"]+lookup_features],
-   description="House features table",
-)
-
-spark.sql(f"ALTER TABLE {feature_table_name} SET TBLPROPERTIES (delta.enableChangeDataFeed = true)")
-
-fe.write_table(
-   name=feature_table_name,
-   df=test_set[["Id"]+lookup_features],
-   mode="merge",
-)
+# MAGIC %md
+# MAGIC
+# MAGIC # Option 1: feature engineering client
+# MAGIC feature_table = fe.create_table(
+# MAGIC    name=feature_table_name,
+# MAGIC    primary_keys=["id"],
+# MAGIC    df=train_set[["id"]+lookup_features],
+# MAGIC    description="Satisfaction features table",
+# MAGIC )
+# MAGIC
+# MAGIC spark.sql(f"ALTER TABLE {feature_table_name} SET TBLPROPERTIES (delta.enableChangeDataFeed = true)")
+# MAGIC
+# MAGIC fe.write_table(
+# MAGIC    name=feature_table_name,
+# MAGIC    df=test_set[["id"]+lookup_features],
+# MAGIC    mode="merge",
+# MAGIC )
+# MAGIC
+# MAGIC ***I DO NOT USE THIS OPTION BECAUSE IT IS PROBLEMATIC FOR CHANGES OF DATA. IT IS BETTER TO DELETE PREVIOUS DATA AS IN THE SQL CASE***
 
 # COMMAND ----------
 
-# create feature table with information about houses
+# create feature table with information about customers
 # Option 2: SQL
 
 spark.sql(f"""
           CREATE OR REPLACE TABLE {feature_table_name}
-          (Id STRING NOT NULL, OverallQual INT, GrLivArea INT, GarageCars INT);
+          (id STRING NOT NULL, flight_distance INT, arrival_delay_in_minutes INT, type_of_travel STRING, online_boarding INT);
           """)
 # primary key on Databricks is not enforced!
 try:
-    spark.sql(f"ALTER TABLE {feature_table_name} ADD CONSTRAINT house_pk_demo PRIMARY KEY(Id);")
+    spark.sql(f"ALTER TABLE {feature_table_name} ADD CONSTRAINT satisfaction_pk_demo PRIMARY KEY(id);")
 except AnalysisException:
     pass
 spark.sql(f"ALTER TABLE {feature_table_name} SET TBLPROPERTIES (delta.enableChangeDataFeed = true);")
 spark.sql(f"""
           INSERT INTO {feature_table_name}
-          SELECT Id, OverallQual, GrLivArea, GarageCars
+          SELECT id, flight_distance, arrival_delay_in_minutes, type_of_travel, online_boarding
           FROM {config.catalog_name}.{config.schema_name}.train_set
           """)
 spark.sql(f"""
           INSERT INTO {feature_table_name}
-          SELECT Id, OverallQual, GrLivArea, GarageCars
+          SELECT id, flight_distance, arrival_delay_in_minutes, type_of_travel, online_boarding
           FROM {config.catalog_name}.{config.schema_name}.test_set
           """)
 
@@ -132,63 +138,105 @@ spark.sql(f"""
 # this is only supported from runtime 17
 # advised to use only for simple calculations
 
-function_name = f"{config.catalog_name}.{config.schema_name}.calculate_house_age_demo"
+function_name = f"{config.catalog_name}.{config.schema_name}.calculate_delay_ratio_demo"
 
 # COMMAND ----------
 
-
-# Option 1: with Python
 spark.sql(f"""
-        CREATE OR REPLACE FUNCTION {function_name}(year_built BIGINT)
-        RETURNS INT
-        LANGUAGE PYTHON AS
+        CREATE OR REPLACE FUNCTION mlops_dev.njavierb.calculate_delay_ratio_demo(departure_delay DOUBLE, arrival_delay DOUBLE)
+        RETURNS DOUBLE
+        LANGUAGE PYTHON
+        AS $$
+        def calculate_delay_ratio_demo(departure_delay, arrival_delay):
+            if arrival_delay is None:
+                arrival_delay = 0.0
+            if departure_delay is None:
+                departure_delay = 0.0
+            return float(departure_delay) / (float(arrival_delay) + 1.0)
+        return calculate_delay_ratio_demo(departure_delay, arrival_delay)
         $$
-        from datetime import datetime
-        return datetime.now().year - year_built
-        $$
-        """)
+""")
 
 # COMMAND ----------
 
-# it is possible to define simple functions in sql only without python
-# Option 2
-spark.sql(f"""
-        CREATE OR REPLACE FUNCTION {function_name}_sql (year_built BIGINT)
-        RETURNS INT
-        RETURN year(current_date()) - year_built;
-        """)
+# MAGIC %md
+# MAGIC # it is possible to define simple functions in sql only without python
+# MAGIC # Option 2
+# MAGIC spark.sql(f"""
+# MAGIC         CREATE OR REPLACE FUNCTION {function_name}_sql(
+# MAGIC         departure_delay_in_minutes BIGINT,
+# MAGIC         arrival_delay_in_minutes BIGINT
+# MAGIC         )
+# MAGIC         RETURNS DOUBLE
+# MAGIC         RETURN ROUND(
+# MAGIC         departure_delay_in_minutes / (arrival_delay_in_minutes + 1), 2
+# MAGIC         )
+# MAGIC """)
+
+# COMMAND ----------
+
+spark.sql("USE CATALOG mlops_dev")
+spark.sql("USE SCHEMA njavierb")
+
+# COMMAND ----------
+
+spark.sql("SHOW USER FUNCTIONS").show(truncate=False)
 
 # COMMAND ----------
 
 # execute function
-spark.sql(f"SELECT {function_name}_sql(1960) as house_age;")
+spark.sql("SELECT mlops_dev.njavierb.calculate_delay_ratio_demo(10, 5) AS delay_ratio").show()
 
 # COMMAND ----------
 
-# create a training set
+from pyspark.sql.functions import col
+from pyspark.sql.types import DoubleType
+
+# ✅ Step 1: Explicitly cast before dropping
+train_set = (
+    train_set
+    .withColumn("departure_delay_in_minutes", col("departure_delay_in_minutes").cast(DoubleType()))
+    .withColumn("arrival_delay_in_minutes", col("arrival_delay_in_minutes").cast(DoubleType()))
+)
+
+# ✅ Step 2: Print schema to confirm
+train_set.select("departure_delay_in_minutes", "arrival_delay_in_minutes").printSchema()
+
+
+# COMMAND ----------
+
 training_set = fe.create_training_set(
-    df=train_set.drop("OverallQual", "GrLivArea", "GarageCars"),
+    df=train_set.drop("flight_distance", "type_of_travel", "online_boarding"),
     label=config.target,
     feature_lookups=[
         FeatureLookup(
             table_name=feature_table_name,
-            feature_names=["OverallQual", "GrLivArea", "GarageCars"],
-            lookup_key="Id",
-                ),
+            feature_names=["flight_distance", "type_of_travel", "online_boarding"],  # removed delay columns
+            lookup_key="id",
+        ),
         FeatureFunction(
-            udf_name=function_name,
-            output_name="house_age",
-            input_bindings={"year_built": "YearBuilt"},
-            ),
+            udf_name="mlops_dev.njavierb.calculate_delay_ratio_demo",
+            output_name="delay_ratio",
+            input_bindings={
+                "departure_delay": "departure_delay_in_minutes",
+                "arrival_delay": "arrival_delay_in_minutes",
+            },
+        ),
     ],
     exclude_columns=["update_timestamp_utc"],
-    )
+)
+
+
+# COMMAND ----------
+
+training_df = training_set.load_df().toPandas()
+display(training_df)
 
 # COMMAND ----------
 
 # Train & register a model
 training_df = training_set.load_df().toPandas()
-X_train = training_df[config.num_features + config.cat_features + ["house_age"]]
+X_train = training_df[config.features + ["delay_ratio"]]
 y_train = training_df[config.target]
 
 # COMMAND ----------
@@ -488,6 +536,10 @@ response = client.get_item(
 # Extract the item from the response
 item = response.get('Item')
 print(item)
+
+# COMMAND ----------
+
+
 
 # COMMAND ----------
 

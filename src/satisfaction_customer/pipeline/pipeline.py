@@ -13,10 +13,6 @@ preprocess_pipeline = Pipeline(
             pp.DataFrameTypeConverter(conversion_dict=settings.CONVERSION_DICT),
         ),
         (
-            "DropColumns",
-            pp.DropColumns(variables_to_drop=settings.VARIABLES_TO_DROP),
-        ),
-        (
             "DropDuplicatesTransformer",
             pp.DropDuplicatesTransformer(),
         ),
