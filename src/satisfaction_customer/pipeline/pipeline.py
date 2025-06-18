@@ -63,19 +63,19 @@ pretrain_pipeline = Pipeline(
         ),
         (
             "OneHotEncoderProcessor",
-            pp.OneHotEncoderProcessor(columns=["Gender"], prefix="Gender"),
+            pp.OneHotEncoderProcessor(columns=["gender"], prefix="gender"),
         ),
         (
             "OneHotEncoderProcessor1",
-            pp.OneHotEncoderProcessor(columns=["Customer Type"], prefix="Customer Type"),
+            pp.OneHotEncoderProcessor(columns=["customer_type"], prefix="customer_type"),
         ),
         (
             "OneHotEncoderProcessor2",
-            pp.OneHotEncoderProcessor(columns=["Type of Travel"], prefix="Type of Travel"),
+            pp.OneHotEncoderProcessor(columns=["type_of_travel"], prefix="type_of_travel"),
         ),
         (
             "OneHotEncoderProcessor3",
-            pp.OneHotEncoderProcessor(columns=settings.FEATURES_ONE_HOT, prefix="Class"),
+            pp.OneHotEncoderProcessor(columns=settings.FEATURES_ONE_HOT, prefix="class"),
         ),
         (
             "DataFrameTypeConverter2",
