@@ -42,7 +42,6 @@ pretrain_pipeline = Pipeline(
             pp.ChosenFeatures(
                 columns=settings.NUMERICAL_FEATURES_3
                 + settings.CATEGORICAL_FEATURES
-                + [settings.TARGET]
             ),
         ),
         (

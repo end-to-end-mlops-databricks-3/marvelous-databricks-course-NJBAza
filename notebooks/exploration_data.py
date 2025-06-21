@@ -28,7 +28,7 @@ pd.set_option("display.max_rows", 500)
 pd.set_option("display.max_columns", 500)
 pd.set_option("display.width", 1000)
 
-
+# COMMAND -----------
 # In[4]:
 
 
@@ -106,6 +106,7 @@ royal.shape
 
 # considering the data types
 
+royal["id"] = royal["id"].astype(str)
 royal["gender"] = royal["gender"].astype(str)
 royal["customer_type"] = royal["customer_type"].astype(str)
 royal["type_of_travel"] = royal["type_of_travel"].astype(str)
@@ -141,7 +142,13 @@ class DataFrameTypeConverter(BaseEstimator, TransformerMixin):
 # In[17]:
 
 
-CONVERSION_DICT = {"gender": str, "customer_type": str, "type_of_travel": str, "class": str}
+CONVERSION_DICT = {
+    "id": str,
+    "gender": str,
+    "customer_type": str,
+    "type_of_travel": str,
+    "class": str,
+}
 
 TO_CONVERT = list(CONVERSION_DICT)
 

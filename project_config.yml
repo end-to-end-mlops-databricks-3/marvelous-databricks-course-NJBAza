@@ -20,7 +20,6 @@ parameters:
 
 features:
   - id
-  - satisfaction_v2
   - gender
   - customer_type
   - age

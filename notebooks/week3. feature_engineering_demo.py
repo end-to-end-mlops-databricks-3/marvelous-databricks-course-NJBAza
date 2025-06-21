@@ -243,9 +243,74 @@ y_train = training_df[config.target]
 
 # COMMAND ----------
 
-full_preprocessing = Pipeline(
-    steps=preprocess_pipeline.steps + pretrain_pipeline.steps
+config.features + ["delay_ratio"]
+
+# COMMAND ----------
+
+pretrain_pipeline_test = Pipeline(
+    [
+        (
+            "FeatureCreator",
+            pp.FeatureCreator(),
+        ),
+        (
+            "Winsorizer",
+            pp.Winsorizer(numerical_features=settings.NUMERICAL_FEATURES2, limits=[0.025, 0.025]),
+        ),
+        (
+            "Chosen",
+            pp.ChosenFeatures(
+                columns=settings.NUMERICAL_FEATURES_3
+                + settings.CATEGORICAL_FEATURES
+            ),
+        ),
+        (
+            "LogTransforms",
+            pp.LogTransforms(),
+        ),
+        (
+            "DataScaler",
+            pp.DataScaler(),
+        ),
+        (
+            "CorrelationMatrixProcessor",
+            pp.CorrelationMatrixProcessor(threshold=0.8),
+        ),
+        (
+            "FeatureVariance",
+            pp.FeatureVariance(threshold=0.001),
+        ),
+        (
+            "OneHotEncoderProcessor",
+            pp.OneHotEncoderProcessor(columns=["gender"], prefix="gender"),
+        ),
+        (
+            "OneHotEncoderProcessor1",
+            pp.OneHotEncoderProcessor(columns=["customer_type"], prefix="customer_type"),
+        ),
+        (
+            "OneHotEncoderProcessor2",
+            pp.OneHotEncoderProcessor(columns=["type_of_travel"], prefix="type_of_travel"),
+        ),
+        (
+            "OneHotEncoderProcessor3",
+            pp.OneHotEncoderProcessor(columns=settings.FEATURES_ONE_HOT, prefix="class"),
+        ),
+        (
+            "DataFrameTypeConverter2",
+            pp.DataFrameTypeConverter(conversion_dict=settings.CONVERSION_DICT2),
+        ),
+        (
+            "DropColumns2",
+            pp.DropColumns(variables_to_drop=settings.TO_DROP),
+        ),
+    ]
 )
+
+# COMMAND ----------
+
+full_preprocessing = Pipeline(steps=preprocess_pipeline.steps + 
+                                    pretrain_pipeline.steps)
 
 # COMMAND ----------
 
@@ -255,144 +320,16 @@ import pickle
 DATAPATH = PACKAGE_ROOT/"data"
 RANDOM_SEED = 20230916
 
-with open(os.path.join(DATAPATH, "VARIABLES_TO_DROP"), "rb") as fp1:
-    conversion_dict = pickle.load(fp1)
-
-print(conversion_dict)
+DATAPATH
 
 
 # COMMAND ----------
 
-print(X_train.columns.tolist())
+df_transformed = full_preprocessing.fit_transform(X_train)
 
 # COMMAND ----------
 
-X1 = pp.DataFrameTypeConverter(conversion_dict=settings.CONVERSION_DICT).fit_transform(X_train)
-print("Step 1 - After DataFrameTypeConverter:")
-print(X1.columns.tolist())
-assert "Gender" in X1.columns, "❌ 'Gender' missing after type conversion"
-
-
-# COMMAND ----------
-
-X2 = pp.DropDuplicatesTransformer().fit_transform(X1)
-print("Step 2 - After DropDuplicatesTransformer:")
-print(X2.columns.tolist())
-assert "Gender" in X2.columns, "❌ 'Gender' missing after dropping duplicates"
-
-
-# COMMAND ----------
-
-X3 = pp.ModeImputer(variables=settings.CATEGORICAL_FEATURES).fit_transform(X2)
-print("Step 3 - After ModeImputer:")
-print(X3.columns.tolist())
-assert "Gender" in X3.columns, "❌ 'Gender' missing after ModeImputer"
-
-# COMMAND ----------
-
-X4 = pp.MedianImputer(variables=settings.NUMERICAL_FEATURES0).fit_transform(X3)
-print("Step 4 - After MedianImputer:")
-print(X4.columns.tolist())
-assert "Gender" in X4.columns, "❌ 'Gender' missing after MedianImputer"
-
-# COMMAND ----------
-
-X = X4.copy()
-
-# Step 0 - Initial
-print("🔍 Step 0 - Input to pretrain_pipeline")
-print(X.columns.tolist())
-#assert "Gender" in X.columns, "❌ 'Gender' missing before pretrain pipeline"
-
-# Step 1 - FeatureCreator
-X = pp.FeatureCreator().fit_transform(X)
-print("🔍 Step 1 - After FeatureCreator")
-print(X.columns.tolist())
-#assert "Gender" in X.columns, "❌ 'Gender' missing after FeatureCreator"
-
-# Step 2 - Winsorizer
-X = pp.Winsorizer(numerical_features=settings.NUMERICAL_FEATURES2, limits=[0.025, 0.025]).fit_transform(X)
-print("🔍 Step 2 - After Winsorizer")
-print(X.columns.tolist())
-#assert "Gender" in X.columns, "❌ 'Gender' missing after Winsorizer"
-
-# Step 3 - ChosenFeatures
-X = pp.ChosenFeatures(columns=settings.NUMERICAL_FEATURES_3 + settings.CATEGORICAL_FEATURES + [settings.TARGET]).fit_transform(X)
-print("🔍 Step 3 - After ChosenFeatures")
-print(X.columns.tolist())
-#assert "Gender" in X.columns, "❌ 'Gender' missing after ChosenFeatures"
-
-# Step 4 - LogTransforms
-X = pp.LogTransforms().fit_transform(X)
-print("🔍 Step 4 - After LogTransforms")
-print(X.columns.tolist())
-#assert "Gender" in X.columns, "❌ 'Gender' missing after LogTransforms"
-
-# Step 5 - DataScaler
-X = pp.DataScaler().fit_transform(X)
-print("🔍 Step 5 - After DataScaler")
-print(X.columns.tolist())
-#assert "Gender" in X.columns, "❌ 'Gender' missing after DataScaler"
-
-# Step 6 - CorrelationMatrixProcessor
-X = pp.CorrelationMatrixProcessor(threshold=0.8).fit_transform(X)
-print("🔍 Step 6 - After CorrelationMatrixProcessor")
-print(X.columns.tolist())
-#assert "Gender" in X.columns, "❌ 'Gender' missing after CorrelationMatrixProcessor"
-
-# Step 7 - FeatureVariance
-X = pp.FeatureVariance(threshold=0.001).fit_transform(X)
-print("🔍 Step 7 - After FeatureVariance")
-print(X.columns.tolist())
-#assert "Gender" in X.columns, "❌ 'Gender' missing after FeatureVariance"
-
-# Step 8 - OneHotEncoderProcessor (Gender)
-X = pp.OneHotEncoderProcessor(columns=["Gender"], prefix="Gender").fit_transform(X)
-print("🔍 Step 8 - After OneHotEncoderProcessor (Gender)")
-print(X.columns.tolist())
-assert any("Gender_" in col for col in X.columns), "❌ Gender one-hot encoding failed"
-
-# Step 9 - OneHotEncoderProcessor1 (Customer Type)
-X = pp.OneHotEncoderProcessor(columns=["Customer Type"], prefix="Customer Type").fit_transform(X)
-print("🔍 Step 9 - After OneHotEncoderProcessor1")
-print(X.columns.tolist())
-
-# Step 10 - OneHotEncoderProcessor2 (Type of Travel)
-X = pp.OneHotEncoderProcessor(columns=["Type of Travel"], prefix="Type of Travel").fit_transform(X)
-print("🔍 Step 10 - After OneHotEncoderProcessor2")
-print(X.columns.tolist())
-
-# Step 11 - OneHotEncoderProcessor3 (Class)
-X = pp.OneHotEncoderProcessor(columns=settings.FEATURES_ONE_HOT, prefix="Class").fit_transform(X)
-print("🔍 Step 11 - After OneHotEncoderProcessor3")
-print(X.columns.tolist())
-
-# Step 12 - DataFrameTypeConverter2
-X = pp.DataFrameTypeConverter(conversion_dict=settings.CONVERSION_DICT2).fit_transform(X)
-print("🔍 Step 12 - After DataFrameTypeConverter2")
-print(X.columns.tolist())
-
-# Step 13 - DropColumns2
-X = pp.DropColumns(variables_to_drop=settings.TO_DROP).fit_transform(X)
-print("🔍 Step 13 - Final output")
-print(X.columns.tolist())
-
-
-# COMMAND ----------
-
-
-
-# COMMAND ----------
-
-
-
-# COMMAND ----------
-
-
-
-# COMMAND ----------
-
-
+df_transformed.head()
 
 # COMMAND ----------
 
@@ -414,7 +351,7 @@ with mlflow.start_run(run_name="demo-run-model-fe",
                             description="demo run for FE model logging") as run:
     # Log parameters and metrics
     run_id = run.info.run_id
-    mlflow.log_param("model_type", "LightGBM with preprocessing")
+    mlflow.log_param("model_type", "Logistic with preprocessing")
     mlflow.log_params(config.parameters)
 
     # Log the model
@@ -422,7 +359,7 @@ with mlflow.start_run(run_name="demo-run-model-fe",
     fe.log_model(
                 model=pipeline,
                 flavor=mlflow.sklearn,
-                artifact_path="lightgbm-pipeline-model-fe",
+                artifact_path="logistic-pipeline-model-fe",
                 training_set=training_set,
                 signature=signature,
             )
@@ -432,7 +369,7 @@ with mlflow.start_run(run_name="demo-run-model-fe",
 
 model_name = f"{config.catalog_name}.{config.schema_name}.model_fe_demo"
 model_version = mlflow.register_model(
-    model_uri=f'runs:/{run_id}/lightgbm-pipeline-model-fe',
+    model_uri=f'runs:/{run_id}/logistic-pipeline-model-fe',
     name=model_name,
     tags={"git_sha": "1234567890abcd"})
 
