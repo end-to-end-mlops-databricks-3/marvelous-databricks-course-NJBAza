@@ -1,9 +1,15 @@
 # Databricks notebook source
-# MAGIC %pip install house_price-1.0.1-py3-none-any.whl
+# MAGIC %pip install satisfaction_customer-1.0.1-py3-none-any.whl
 
 # COMMAND ----------
 
-# MAGIC %restart_python
+# install dependencies
+%pip install -e ..
+token = dbutils.secrets.get("my-secrets", "GIT_TOKEN")
+url = f"git+https://oauth:{token}@github.com/end-to-end-mlops-databricks-3/marvelous@0.1.0"
+%pip install $url
+#restart python
+%restart_python
 
 # COMMAND ----------
 
@@ -12,8 +18,8 @@ import mlflow
 from loguru import logger
 from pyspark.sql import SparkSession
 
-from house_price.config import ProjectConfig, Tags
-from house_price.models.feature_lookup_model import FeatureLookUpModel
+from satisfaction_customer.config import ProjectConfig, Tags
+from satisfaction_customer.models.feature_lookup_model import FeatureLookUpModel
 
 # Configure tracking uri
 # mlflow.set_tracking_uri("databricks")

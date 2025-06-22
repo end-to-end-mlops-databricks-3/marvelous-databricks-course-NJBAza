@@ -443,7 +443,7 @@ with open(os.path.join(DATAPATH, "NUMERICAL_FEATURES2"), "wb") as fp15:
 
 # COMMAND ----------
 
-royal.describe().T
+royal.columns
 
 # COMMAND ----------
 
@@ -644,16 +644,46 @@ with open(os.path.join(DATAPATH, "FEATURES_ENCODE"), "wb") as fp10:
 
 royal_final = pd.get_dummies(
     royal[CATEGORICAL_FEATURES + NUMERICAL_CONSIDER + ["satisfaction_v2"]],
-    columns=["gender", "customer_type", "type_of_travel", "class"],
+    columns=["gender", "customer_type", "type_of_travel", "class"], drop_first=False, dtype=int,
 )
 
 # COMMAND ----------
 
-dummy_columns = [
-    col
-    for col in royal_final.columns
-    if "gender" in col or "customer" in col or "type" in col or "class" in col
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+
+preprocessor_cat = ColumnTransformer(
+    transformers=[
+        ("cat", OneHotEncoder(handle_unknown="ignore"),
+         ["gender", "customer_type", "type_of_travel", "class"])
+    ],
+    remainder="passthrough"
+)
+
+royal_cat = preprocessor_cat.fit_transform(royal[["gender", "customer_type", "type_of_travel", "class"]])
+pd.DataFrame(royal_cat)
+
+# COMMAND ----------
+
+royal_final
+
+# COMMAND ----------
+
+# Normalize dummy column names after get_dummies
+royal_final.columns = [
+    col.lower().replace(" ", "_") for col in royal_final.columns
 ]
+
+# Extract normalized dummy column names
+dummy_columns = [
+    col for col in royal_final.columns
+    if "gender" in col or "customer_type" in col or "type_of_travel" in col or "class" in col
+]
+
+
+# COMMAND ----------
+
+dummy_columns
 
 # COMMAND ----------
 
@@ -711,10 +741,10 @@ with open(os.path.join(DATAPATH, "TO_CONVERT2"), "wb") as fp13:
 # COMMAND ----------
 
 TO_DROP = [
-    "gender_Female",
-    "customer_type_disloyal Customer",
-    "type_of_travel_Personal Travel",
-    "class_Business",
+    "gender_female",
+    "customer_type_disloyal_customer",
+    "type_of_travel_personal_travel",
+    "class_business",
 ]
 
 # COMMAND ----------
@@ -816,6 +846,10 @@ pipeline = Pipeline(
 # COMMAND ----------
 
 settings.CONVERSION_DICT2
+
+# COMMAND ----------
+
+settings.TO_DROP
 
 # COMMAND ----------
 

@@ -966,10 +966,19 @@ class OneHotEncoderProcessor(BaseEstimator, TransformerMixin):
 
         """
         X = X.copy()
+
+        for col in self.columns:
+            if X[col].dtype == "object":
+                X[col] = X[col].str.strip().str.lower().str.replace(" ", "_", regex=False)
+
         X_encoded = pd.get_dummies(X, columns=self.columns, prefix=self.prefix)
-        dummy_columns = [col for col in X_encoded.columns if self.prefix in col]
+
+        dummy_columns = [col for col in X_encoded.columns if any(f"{p}_" in col for p in ([self.prefix] if isinstance(self.prefix, str) else self.prefix))]
         X_encoded[dummy_columns] = X_encoded[dummy_columns].astype(int)
+
         return X_encoded
+
+
 
     def fit_transform(self, X: pd.DataFrame, y: pd.Series | None = None) -> pd.DataFrame:
         """Fit and transform the input data.

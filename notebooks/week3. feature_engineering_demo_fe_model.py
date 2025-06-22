@@ -22,8 +22,28 @@ sys.path.append(str(PACKAGE_ROOT / "src"))
 
 # COMMAND ----------
 
-# A better approach (this file must be present in a notebook folder, achieved via synchronization)
-#%pip install satisfaction_customer-1.0.1-py3-none-any.whl
+# Inside a notebook cell:
+%pip install -e ./src 
+
+# COMMAND ----------
+
+# Configure tracking uri
+import mlflow
+from loguru import logger
+from pyspark.sql import SparkSession
+
+from satisfaction_customer.config import ProjectConfig, Tags
+from satisfaction_customer.models.feature_lookup_model import FeatureLookUpModel
+# Configure tracking uri
+# mlflow.set_tracking_uri("databricks")
+# mlflow.set_registry_uri("databricks-uc")
+
+spark = SparkSession.builder.getOrCreate()
+tags_dict = {"git_sha": "abcd12345", "branch": "week2"}
+tags = Tags(**tags_dict)
+
+config = ProjectConfig.from_yaml(config_path="../project_config.yml")
+
 
 # COMMAND ----------
 
