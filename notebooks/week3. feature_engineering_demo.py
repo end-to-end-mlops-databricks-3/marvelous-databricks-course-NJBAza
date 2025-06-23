@@ -217,12 +217,6 @@ training_set = fe.create_training_set(
     exclude_columns=["update_timestamp_utc"],
 )
 
-
-# COMMAND ----------
-
-training_df = training_set.load_df().toPandas()
-display(training_df)
-
 # COMMAND ----------
 
 # Train & register a model

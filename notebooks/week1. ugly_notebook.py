@@ -20,8 +20,6 @@ from sklearn.model_selection import train_test_split
 
 # COMMAND ----------
 
-<<<<<<< HEAD
-
 # Load configuration
 def load_env_config(env: str = "dev"):
     with open("../project_config.yml") as file:
@@ -29,14 +27,6 @@ def load_env_config(env: str = "dev"):
     return config[env]
 
 
-=======
-# Load configuration
-def load_env_config(env: str = "dev"):
-    with open("../project_config.yml") as file:
-        config = yaml.safe_load(file)
-    return config[env]
-
->>>>>>> 3aa2e59 (updating to my necessities)
 env_config = load_env_config("dev")
 catalog_name = env_config["catalog_name"]
 schema_name = env_config["schema_name"]

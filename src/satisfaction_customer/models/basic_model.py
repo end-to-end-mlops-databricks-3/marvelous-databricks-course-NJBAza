@@ -18,11 +18,13 @@ from mlflow import MlflowClient
 from mlflow.data.dataset_source import DatasetSource
 from mlflow.models import infer_signature
 from pyspark.sql import SparkSession
+from sklearn.compose import ColumnTransformer
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
     recall_score,
     f1_score,
+    confusion_matrix,
 )
 
 from satisfaction_customer.config import ProjectConfig, Tags

@@ -121,6 +121,22 @@ spark.sql("DROP TABLE IF EXISTS mlops_dev.njavierb.test_set")
 
 # COMMAND ----------
 
+# Show available catalogs
+spark.sql("SHOW CATALOGS").show()
+
+# Use your target catalog and schema
+spark.sql("USE CATALOG mlops_dev")
+spark.sql("SHOW SCHEMAS IN mlops_dev").show()
+
+spark.sql("USE SCHEMA njavierb")
+
+spark.sql("SELECT current_catalog(), current_schema()").show()
+
+spark.sql("DROP TABLE IF EXISTS mlops_dev.njavierb.train_set")
+spark.sql("DROP TABLE IF EXISTS mlops_dev.njavierb.test_set")
+
+# COMMAND ----------
+
 spark.catalog.tableExists("mlops_dev.njavierb.train_set")
 spark.sql("SHOW TABLES IN mlops_dev.njavierb").show()
 
