@@ -13,6 +13,10 @@ print(sys.version)
 
 # COMMAND ----------
 
+# MAGIC %pip list
+
+# COMMAND ----------
+
 # MAGIC %pip install -e ..
 
 # COMMAND ----------
@@ -31,11 +35,15 @@ url = f"git+https://{token}@github.com/end-to-end-mlops-databricks-3/marvelous@0
 
 from pathlib import Path
 import sys
-sys.path.append(str(Path.cwd().parent / 'src'))
-
+PACKAGE_ROOT = Path.cwd().parent
+sys.path.append(str(PACKAGE_ROOT / "src"))
 print("Current working directory:", Path.cwd())
 print("Parent directory:", Path.cwd().parent)
 print("Target src path added:", Path.cwd().parent / 'src')
+
+print(PACKAGE_ROOT)
+DATAPATH = PACKAGE_ROOT/"data"
+print(DATAPATH)
 
 # COMMAND ----------
 
@@ -43,6 +51,7 @@ import pandas as pd
 import yaml
 from satisfaction_customer.config import ProjectConfig
 from satisfaction_customer.data_processor import DataProcessor
+from satisfaction_customer.pipeline.pipeline import preprocess_pipeline
 from loguru import logger
 from marvelous.logging import setup_logging
 from marvelous.timer import Timer
@@ -57,26 +66,31 @@ logger.info(yaml.dump(config, default_flow_style=False))
 
 # COMMAND ----------
 
-# Load the house prices dataset
+# Load the satisfaction customer dataset
 spark = SparkSession.builder.getOrCreate()
 
-filepath = "../data/data.csv"
+filepath = DATAPATH / "data.csv"
 
 # Load the data
 df = pd.read_csv(filepath)
 
+# COMMAND ----------
+
+df.head()
 
 # COMMAND ----------
 
-# Load the house prices dataset
+df.shape
+
+# COMMAND ----------
+
+# Creating the data processor object
 with Timer() as preprocess_timer:
     # Initialize DataProcessor
-    data_processor = DataProcessor(df, config, spark)
+    data_processor = DataProcessor(df, preprocess_pipeline, spark, config)
 
-    # Preprocess the data
-    data_processor.preprocess()
-
-logger.info(f"Data preprocessing: {preprocess_timer}")
+logger.info(f"Data preprocessing: {data_processor}")
+print(f"The original data {data_processor}")
 
 # COMMAND ----------
 
@@ -87,9 +101,52 @@ logger.info("Test set shape: %s", X_test.shape)
 
 # COMMAND ----------
 
+X_train
+
+# COMMAND ----------
+
+# Show available catalogs
+spark.sql("SHOW CATALOGS").show()
+
+# Use your target catalog and schema
+spark.sql("USE CATALOG mlops_dev")
+spark.sql("SHOW SCHEMAS IN mlops_dev").show()
+
+spark.sql("USE SCHEMA njavierb")
+
+spark.sql("SELECT current_catalog(), current_schema()").show()
+
+spark.sql("DROP TABLE IF EXISTS mlops_dev.njavierb.train_set")
+spark.sql("DROP TABLE IF EXISTS mlops_dev.njavierb.test_set")
+
+# COMMAND ----------
+
+# Show available catalogs
+spark.sql("SHOW CATALOGS").show()
+
+# Use your target catalog and schema
+spark.sql("USE CATALOG mlops_dev")
+spark.sql("SHOW SCHEMAS IN mlops_dev").show()
+
+spark.sql("USE SCHEMA njavierb")
+
+spark.sql("SELECT current_catalog(), current_schema()").show()
+
+spark.sql("DROP TABLE IF EXISTS mlops_dev.njavierb.train_set")
+spark.sql("DROP TABLE IF EXISTS mlops_dev.njavierb.test_set")
+
+# COMMAND ----------
+
+spark.catalog.tableExists("mlops_dev.njavierb.train_set")
+spark.sql("SHOW TABLES IN mlops_dev.njavierb").show()
+
+# COMMAND ----------
+
 # Save to catalog
 logger.info("Saving data to catalog")
 data_processor.save_to_catalog(X_train, X_test)
+
+# COMMAND ----------
 
 # Enable change data feed (only once!)
 logger.info("Enable change data feed")

@@ -30,7 +30,7 @@ Taskfile provides a consistent and reliable way to:
 
 ---
 
-## 🚀 Usage
+## Usage
 
 Once Task is installed, you can run any task like this:
 
@@ -56,15 +56,15 @@ task clean
 
 ## 📋 Available Tasks
 
-| Task                                     | Description |
-|------------------------------------------|-------------|
-| `create-venv`                            | Creates a virtual environment using `uv` with Python 3.11.9. |
-| `sync-dev`                               | Deletes and recreates the virtual environment, then installs all **dev dependencies** from `pyproject.toml`. |
-| `sync-test`                              | Deletes and recreates the virtual environment, then installs only the **test dependencies**. |
-| `lint`                                   | Runs `pre-commit` hooks on all files using `uv run`. |
-| `run-unit-tests`                         | Runs `pytest` with coverage tracking, stores results in the `test-reports/` directory. |
-| `clean`                                  | Removes build artifacts, cache files, `.pyc` files, and temporary test files. |
-| `build`                                  | Builds the project using `uv build` (uses `setuptools`). |
-| `serve-coverage-report`                  | Serves the HTML coverage report at [http://localhost:8000](http://localhost:8000). |
-| `serve-latest-registered-model-locally`  | Downloads the latest registered MLflow model from Databricks and serves it locally via `mlflow models serve`. |
-| `help` or `default`                      | Lists all defined tasks with their descriptions. |
+| Task                                    | Description                                                                                                   |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `create-venv`                           | Creates a virtual environment using `uv` with Python 3.11.9.                                                  |
+| `sync-dev`                              | Deletes and recreates the virtual environment, then installs all **dev dependencies** from `pyproject.toml`.  |
+| `sync-test`                             | Deletes and recreates the virtual environment, then installs only the **test dependencies**.                  |
+| `lint`                                  | Runs `pre-commit` hooks on all files using `uv run`.                                                          |
+| `run-unit-tests`                        | Runs `pytest` with coverage tracking, stores results in the `test-reports/` directory.                        |
+| `clean`                                 | Removes build artifacts, cache files, `.pyc` files, and temporary test files.                                 |
+| `build`                                 | Builds the project using `uv build` (uses `setuptools`).                                                      |
+| `serve-coverage-report`                 | Serves the HTML coverage report at [http://localhost:8000](http://localhost:8000).                            |
+| `serve-latest-registered-model-locally` | Downloads the latest registered MLflow model from Databricks and serves it locally via `mlflow models serve`. |
+| `help` or `default`                     | Lists all defined tasks with their descriptions.                                                              |

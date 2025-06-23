@@ -427,41 +427,41 @@ class FeatureCreator(BaseEstimator, TransformerMixin):
         """Create new features based on combinations of existing columns."""
         X = X.copy()
 
-        X["age_flight_distance_feat"] = X["Age"] * X["Flight Distance"]
-        X["wifi_flight_distance_feat"] = X["Inflight wifi service"] * X["Flight Distance"]
-        X["online_boarding_booking_feat"] = X["Online boarding"] * X["Ease of Online booking"]
+        X["age_flight_distance_feat"] = X["age"] * X["flight_distance"]
+        X["wifi_flight_distance_feat"] = X["inflight_wifi_service"] * X["flight_distance"]
+        X["online_boarding_booking_feat"] = X["online_boarding"] * X["ease_of_online_booking"]
 
         X["inflight_service_feat"] = (
-            X["Inflight wifi service"] + X["Food and drink"] + X["Inflight entertainment"] + X["Inflight service"]
+            X["inflight_wifi_service"] + X["food_and_drink"] + X["inflight_entertainment"] + X["inflight_service"]
         ) / 4
 
         X["preflight_experience_feat"] = (
-            X["Ease of Online booking"]
-            + X["Checkin service"]
-            + X["Gate location"]
-            + X["Departure/Arrival time convenient"]
+            X["ease_of_online_booking"]
+            + X["checkin_service"]
+            + X["gate_location"]
+            + X["departure_arrival_time_convenient"]
         ) / 4
 
-        X["total_delay_feat"] = X["Departure Delay in Minutes"] + X["Arrival Delay in Minutes"]
+        X["total_delay_feat"] = X["departure_delay_in_minutes"] + X["arrival_delay_in_minutes"]
         X["significant_delay_feat"] = np.where(
-            (X["Departure Delay in Minutes"] > 15) | (X["Arrival Delay in Minutes"] > 15), 1, 0
+            (X["departure_delay_in_minutes"] > 15) | (X["arrival_delay_in_minutes"] > 15), 1, 0
         )
-        X["short_flight_feat"] = np.where(X["Flight Distance"] < 300, 1, 0)
+        X["short_flight_feat"] = np.where(X["flight_distance"] < 300, 1, 0)
         X["service_difference_feat"] = X["preflight_experience_feat"] - X["inflight_service_feat"]
-        X["departure_delay_ratio_feat"] = X["Departure Delay in Minutes"] / (1 + X["total_delay_feat"])
-        X["on_time_arrival_feat"] = np.where((X["Arrival Delay in Minutes"] == 0), 1, 0)
+        X["departure_delay_ratio_feat"] = X["departure_delay_in_minutes"] / (1 + X["total_delay_feat"])
+        X["on_time_arrival_feat"] = np.where((X["arrival_delay_in_minutes"] == 0), 1, 0)
 
         X["satisfied_boarding_process_feat"] = np.where(
-            (X["Ease of Online booking"] > 4) & (X["Online boarding"] > 4), 1, 0
+            (X["ease_of_online_booking"] > 4) & (X["online_boarding"] > 4), 1, 0
         )
-        X["comfortable_flight_feat"] = np.where((X["Seat comfort"] > 4) & (X["Leg room service"] > 4), 1, 0)
+        X["comfortable_flight_feat"] = np.where((X["seat_comfort"] > 4) & (X["leg_room_service"] > 4), 1, 0)
         X["long_delay_feat"] = np.where(
-            (X["Departure Delay in Minutes"] > 45) | (X["Arrival Delay in Minutes"] > 45), 1, 0
+            (X["departure_delay_in_minutes"] > 45) | (X["arrival_delay_in_minutes"] > 45), 1, 0
         )
         X["total_service_time_feat"] = (
-            X["Gate location"] + X["Checkin service"] + X["Departure/Arrival time convenient"]
+            X["gate_location"] + X["checkin_service"] + X["departure_arrival_time_convenient"]
         )
-        X["long_haul_feat"] = np.where(X["Flight Distance"] > 2000, 1, 0)
+        X["long_haul_feat"] = np.where(X["flight_distance"] > 2000, 1, 0)
 
         return X
 
@@ -966,10 +966,19 @@ class OneHotEncoderProcessor(BaseEstimator, TransformerMixin):
 
         """
         X = X.copy()
+
+        for col in self.columns:
+            if X[col].dtype == "object":
+                X[col] = X[col].str.strip().str.lower().str.replace(" ", "_", regex=False)
+
         X_encoded = pd.get_dummies(X, columns=self.columns, prefix=self.prefix)
-        dummy_columns = [col for col in X_encoded.columns if self.prefix in col]
+
+        dummy_columns = [col for col in X_encoded.columns if any(f"{p}_" in col for p in ([self.prefix] if isinstance(self.prefix, str) else self.prefix))]
         X_encoded[dummy_columns] = X_encoded[dummy_columns].astype(int)
+
         return X_encoded
+
+
 
     def fit_transform(self, X: pd.DataFrame, y: pd.Series | None = None) -> pd.DataFrame:
         """Fit and transform the input data.

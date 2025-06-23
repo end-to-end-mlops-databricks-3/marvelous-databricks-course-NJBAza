@@ -1,41 +1,47 @@
 prd:
   catalog_name: mlops_prd
-  schema_name: satisfaction_customer
+  schema_name: njavierb
 acc:
   catalog_name: mlops_acc
-  schema_name: satisfaction_customer
+  schema_name: njavierb
 dev:
   catalog_name: mlops_dev
-  schema_name: satisfaction_customer
+  schema_name: njavierb
+
+experiment_name_basic: /Shared/satisfaction-customer-basic
+experiment_name_custom: /Shared/satisfaction-customer-custom
+experiment_name_fe: /Shared/satisfaction-customer-fe
 
 parameters:
-  learning_rate: 0.01
-  n_estimators: 1000
-  max_depth: 6
+  solver: liblinear
+  class_weight: balanced
+  penalty: l1
+  max_iter: 200
+  C: 0.01
 
 features:
   - id
-  - Gender
-  - Customer Type
-  - Age
-  - Type of Travel
-  - Class
-  - Flight Distance
-  - Inflight wifi service
-  - Departure/Arrival time convenient
-  - Ease of Online booking
-  - Gate location
-  - Food and drink
-  - Online boarding
-  - Seat comfort
-  - Inflight entertainment
-  - On-board service
-  - Leg room service
-  - Baggage handling
-  - Checkin service
-  - Inflight service
-  - Cleanliness
-  - Departure Delay in Minutes
-  - Arrival Delay in Minutes
+  - gender
+  - customer_type
+  - age
+  - type_of_travel
+  - class
+  - flight_distance
+  - inflight_wifi_service
+  - departure_arrival_time_convenient
+  - ease_of_online_booking
+  - gate_location
+  - food_and_drink
+  - online_boarding
+  - seat_comfort
+  - inflight_entertainment
+  - on_board_service
+  - leg_room_service
+  - baggage_handling
+  - checkin_service
+  - inflight_service
+  - cleanliness
+  - departure_delay_in_minutes
+  - arrival_delay_in_minutes
 
 target: satisfaction_v2

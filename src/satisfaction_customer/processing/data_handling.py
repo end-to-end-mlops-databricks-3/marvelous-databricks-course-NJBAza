@@ -70,7 +70,7 @@ def split_data(
         X_train, X_test, y_train, y_test
 
     """
-    return train_test_split(X, y, test_size=test_size, random_state=random_state)
+    return train_test_split(X, y, test_size=test_size, random_state=RANDOM_SEED)
 
 
 def save_pipeline(pipeline_to_save: Pipeline) -> None:

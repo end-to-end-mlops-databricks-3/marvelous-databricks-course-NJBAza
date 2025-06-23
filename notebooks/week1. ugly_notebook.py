@@ -1,8 +1,8 @@
 # Databricks notebook source
 # MAGIC %md
-# MAGIC # House Price Prediction Exercise
+# MAGIC # Satisfaction customer Prediction Exercise
 # MAGIC
-# MAGIC This notebook demonstrates how to predict house prices using the house price dataset. We'll go through the process of loading data, preprocessing, model creation, and visualization of results.
+# MAGIC This notebook demonstrates how to predict the satisfaction customer using a kaggle dataset. We'll go through the process of loading data, preprocessing, model creation, and visualization of results.
 # MAGIC
 # MAGIC ## Importing Required Libraries
 # MAGIC
@@ -21,11 +21,15 @@ from sklearn.model_selection import train_test_split
 # COMMAND ----------
 
 # Load configuration
-with open("../project_config.yml") as file:
-    config = yaml.safe_load(file)
+def load_env_config(env: str = "dev"):
+    with open("../project_config.yml") as file:
+        config = yaml.safe_load(file)
+    return config[env]
 
-catalog_name = config["catalog_name"]
-schema_name = config["schema_name"]
+
+env_config = load_env_config("dev")
+catalog_name = env_config["catalog_name"]
+schema_name = env_config["schema_name"]
 
 
 # COMMAND ----------
