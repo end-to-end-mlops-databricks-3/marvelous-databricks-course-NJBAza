@@ -1,4 +1,3 @@
-# Databricks notebook source
 """FeatureLookUp model implementation."""
 
 from datetime import datetime
@@ -25,6 +24,7 @@ from sklearn.metrics import (
 from satisfaction_customer.config import ProjectConfig, Tags
 from satisfaction_customer.pipeline.pipeline import preprocess_pipeline, pretrain_pipeline
 
+RANDOM_SEED = 20230916
 
 class FeatureLookUpModel:
     """A class to manage FeatureLookupModel."""
@@ -63,17 +63,17 @@ class FeatureLookUpModel:
         """
         )
         self.spark.sql(
-            f"ALTER TABLE {self.feature_table_name} ADD CONSTRAINT satisfaction_pk PRIMARY KEY(Id);"
+            f"ALTER TABLE {self.feature_table_name} ADD CONSTRAINT satisfaction_pk PRIMARY KEY(id);"
         )
         self.spark.sql(
             f"ALTER TABLE {self.feature_table_name} SET TBLPROPERTIES (delta.enableChangeDataFeed = true);"
         )
 
         self.spark.sql(
-            f"INSERT INTO {self.feature_table_name} SELECT Id, flight_distance, inflight_wifi_service, online_boarding FROM {self.catalog_name}.{self.schema_name}.train_set"
+            f"INSERT INTO {self.feature_table_name} SELECT id, flight_distance, inflight_wifi_service, online_boarding FROM {self.catalog_name}.{self.schema_name}.train_set"
         )
         self.spark.sql(
-            f"INSERT INTO {self.feature_table_name} SELECT Id, flight_distance, inflight_wifi_service, online_boarding FROM {self.catalog_name}.{self.schema_name}.test_set"
+            f"INSERT INTO {self.feature_table_name} SELECT id, flight_distance, inflight_wifi_service, online_boarding FROM {self.catalog_name}.{self.schema_name}.test_set"
         )
         logger.info("Feature table created and populated.")
 
@@ -84,7 +84,7 @@ class FeatureLookUpModel:
         """
         self.spark.sql(
             f"""
-            CREATE OR REPLACE FUNCTION mlops_dev.njavierb.is_loyal_and_business_travel_demo(customer_type STRING, type_of_travel STRING)
+            CREATE OR REPLACE FUNCTION {self.function_name}(customer_type STRING, type_of_travel STRING)
             RETURNS DOUBLE
             LANGUAGE PYTHON
             AS $$
@@ -150,18 +150,18 @@ class FeatureLookUpModel:
         )
 
         self.training_df = self.training_set.load_df().toPandas()
-        self.test_set = self.test_set.withColumn(
-            "is_loyal_biz",
-            when(
-                (col("customer_type") == "Loyal Customer")
-                & (col("type_of_travel") == "Business travel"),
-                1,
-            ).otherwise(0),
+        self.test_set["is_loyal_biz"] = (
+            ((self.test_set["customer_type"] == "Loyal Customer") & 
+            (self.test_set["type_of_travel"] == "Business travel"))
+            .astype(int)
         )
 
+
         self.X_train = self.training_df[self.features + ["is_loyal_biz"]]
+        print(self.X_train.columns)
         self.y_train = self.training_df[self.target]
         self.X_test = self.test_set[self.features + ["is_loyal_biz"]]
+        print(self.X_test.columns)
         self.y_test = self.test_set[self.target]
 
         logger.info("Feature engineering completed.")
@@ -188,8 +188,8 @@ class FeatureLookUpModel:
         mlflow.set_experiment(self.experiment_name)
         with mlflow.start_run(tags={k: str(v) for k, v in self.tags.items()}) as run:
             self.run_id = run.info.run_id
-
-            y_pred = self.model.predict(self.X_test)
+            pipeline.fit(self.X_train, self.y_train)
+            y_pred = pipeline.predict(self.X_test)
 
             # Convert string labels to binary (1 for "satisfied", 0 otherwise)
             y_test_bin = [1 if y == "satisfied" else 0 for y in self.y_test]

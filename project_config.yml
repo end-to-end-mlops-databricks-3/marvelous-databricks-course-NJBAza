@@ -10,6 +10,7 @@ dev:
 
 experiment_name_basic: /Shared/satisfaction-customer-basic
 experiment_name_custom: /Shared/satisfaction-customer-custom
+experiment_name_fe: /Shared/satisfaction-customer-fe
 
 parameters:
   solver: liblinear

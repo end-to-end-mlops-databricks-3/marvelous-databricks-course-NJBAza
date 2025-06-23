@@ -58,6 +58,10 @@ with open(os.path.join(DATAPATH, "ORIGINAL_FEATURES"), "wb") as fp0:
 
 # COMMAND ----------
 
+ORIGINAL_FEATURES
+
+# COMMAND ----------
+
 royal.isnull().sum().sum()
 
 # COMMAND ----------
@@ -868,9 +872,45 @@ y_preprocess = df_preprocess['satisfaction_v2']
 
 df_transformed = pipeline.fit_transform(X_preprocess)
 
+pipeline.fit(X_preprocess)
+
+# Get final features from the last step (before estimator)
+X_final = pipeline.transform(X_preprocess)
+
+if isinstance(X_final, pd.DataFrame):
+    print(X_final.columns.tolist())
+
+
 # COMMAND ----------
 
  df_transformed
+
+# COMMAND ----------
+
+from sklearn.linear_model import LogisticRegression
+from satisfaction_customer.config import ProjectConfig
+
+config = ProjectConfig.from_yaml(config_path="../project_config.yml", env="dev")
+RANDOM_SEED = 20230916
+
+
+model = Pipeline(
+        steps=[
+                ("preprocessor", pipeline),
+                (
+                    "classifier",
+                    LogisticRegression(**config.parameters, random_state=RANDOM_SEED),
+                ),
+            ]
+        )
+
+# COMMAND ----------
+
+model.fit(X_preprocess, y_preprocess)
+
+# COMMAND ----------
+
+print(model.named_steps["pipeline"].get_feature_names_out())
 
 # COMMAND ----------
 
